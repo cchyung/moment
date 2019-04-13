@@ -34,3 +34,4 @@ discovery:
 reindex.remote.whitelist: ${REMOTE_WHITE_LIST}
 
 xpack.security.audit.enabled: false
+xpack.security.enabled: false

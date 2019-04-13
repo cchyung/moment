@@ -1,0 +1,71 @@
+{
+    "index_patterns": ["images-*"],
+    "settings": {
+        "index": {
+            "number_of_shards": 1,
+            "number_of_replicas": 0
+        },
+        "analysis": {
+          "tokenizer": {
+            "hack_tokenizer": {
+              "type": "pattern",
+              "pattern": "[ ,!?)({}\\\"\n+\\[\\]]"
+            }
+          },
+          "filter": {
+            "english_stop": {
+              "type":       "stop",
+              "stopwords": "_english_"
+            }
+          },
+          "analyzer": {
+            "hack_analyzer": {
+              "type": "custom",
+              "char_filter":  ["html_strip"],
+              "tokenizer": "hack_tokenizer",
+              "filter": ["lowercase", "english_stop"]
+            }
+          }
+        }
+    },
+    "mappings": {
+        "doc": {
+            "dynamic": false,
+            "properties": {
+                "id": {
+                    "type": "keyword"
+                },
+                "user_id": {
+                    "type": "keyword"
+                },
+                "name": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "labels": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "source": {
+                    "type": "keyword"
+                },
+                "vector": {
+                    "type": "float"
+                },
+                "encoded_vector": {
+                    "type": "keyword"
+                }
+            }
+        }
+    }
+  }

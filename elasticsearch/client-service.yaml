@@ -5,11 +5,11 @@ metadata:
   annotations:
     cloud.google.com/load-balancer-type: "Internal"
   labels:
-    component: es-client-service
+    component: es
     role: client
 spec:
   selector:
-    component: es-client
+    component: es
     role: client
   ports:
   - name: http

@@ -18,7 +18,7 @@ spec:
         cloud.google.com/gke-nodepool: default-pool
       containers:
       - name: es-kibana
-        image: docker.elastic.co/kibana/kibana:6.2.4
+        image: docker.elastic.co/kibana/kibana-oss:6.2.4
         imagePullPolicy: Always
         env:
         - name: CLUSTER_NAME
