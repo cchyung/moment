@@ -3,6 +3,7 @@ import os
 from flask import Flask
 
 from client.vision import VisionClient, MLClient
+from client.es import ESClient
 
 es_client = ESClient()
 # vc = VisionClient()

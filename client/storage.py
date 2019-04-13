@@ -6,7 +6,7 @@ import random
 from datetime import datetime
 from PIL import Image
 import string
-
+import hashlib
 
 PROJECT_NAME = 'hack-sc-project'
 
@@ -18,15 +18,16 @@ def upload_image(username, image, file_name):
     """Uploads a file to the bucket."""
     storage_client = storage.Client()
     bucket = storage_client.get_bucket(PROJECT_NAME)
-    new_file_name = generate_file_name()
-    blob = bucket.blob(f'images/{username}/{new_file_name}.{extension}')
+    _id = generate_file_name(image)
+    blob = bucket.blob(f'images/{username}/{_id}.{extension}')
     blob.upload_from_string(image)
 
-    return f'{new_file_name}.{extension}'
+    return (_id, f'{_id}.{extension}')
 
-def generate_file_name():
-    random.seed(datetime.now())
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=32))
+def generate_file_name(image):
+    m = hashlib.md5()
+    m.update(image)
+    return m.hexdigest()
 
 # def convert_to_jpeg(image):
     

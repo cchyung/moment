@@ -1,6 +1,8 @@
 import functools
 # from flaskr.__init__ import vc, ml
 # from flaskr.__init__ import ml
+from flaskr.__init__ import es_client
+
 
 from client import storage
 
@@ -71,35 +73,27 @@ def upload_image(username):
     
     buffer = BytesIO()
     file.save(buffer)
-    file_name = storage.upload_image('markhuds', buffer.getvalue(), file.filename)
+    _id, file_name = storage.upload_image('markhuds', buffer.getvalue(), file.filename)
 
     # TODO: Change this to the URL we get after uploading to GCS
     # file_name = storage.upload_image('markhuds', file)
 
-    url = f'https://storage.googleapis.com/hack-sc-project/images/markhuds/{file_name}'
+    url = f'hack-sc-project/images/markhuds/{file_name}'
+
     print(url)
+    
     # get prediction vector from ML Model
-    # vector = ml.vectorize(url)
-    # labels = vc.annotate(url)
+    # vector = ml.vectorize(f'https://storage.googleapis.com/{url}')
+    # labels = vc.annotate(f'https://storage.googleapis.com/{url}')
     labels = []
     vector = []
-
-    print(labels)
-
-    """
-        TODO:
-            1. Generate Unique File Name
-            2. Run inferences through both models X
-            3. Upload to Google Cloud 
-    """
+    new_image = Image('markhuds', _id, url, vector, labels)
+    es_client.addImage(new_image)
 
     return jsonify(
         {
-            'msg': 'image uploaded!',
-            'username': username,
-            'filename': filename,
-            'vector': vector,
-            'labels': labels
+            'msg': 'image uploaded',
+            'image': new_image.to_json()
         }
     )
 
