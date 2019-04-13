@@ -35,12 +35,41 @@ class ESClient:
         d = self.es.get(index="images-index", doc_type='doc', id=_id).get('_source')
         im = Image(d.get('user_id'), _id, d.get('source'), vector=d.get('vector'), labels=d.get('labels'))
         return im
+    
+    def getAlbum(self, user, label, pageSize=20, page=0):
+        q = {
+          "size": pageSize,
+          "from": page * pageSize,
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "user_id": {
+                      "value": user
+                    }
+                  }
+                },
+                {
+                  "term": {
+                    "labels": label
+                  }
+                }
+              ]
+            }
+          }
+        }
+        return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
         
     
-    def vectorSimilaritySearch(self, _id):
-        vector = self.getImage(_id).vector
+    def vectorSimilaritySearch(self, _id, pageSize=20, page=0):
+        im = self.getImage(_id)
+        vector = im.vector
+        user = im.user
         
         q = {
+          "size": pageSize,
+          "from": page * pageSize,
           "_source": ["id", "user_id", "source", "labels"],
           "query": {
             "function_score": {
@@ -60,14 +89,24 @@ class ESClient:
               "boost_mode": "sum",
               "query": {
                 "bool": {
-                    "must": {
-                      "exists": {
-                        "field": "encoded_vector"
-                      }
-                    }
+                    "must": [
+                        {
+                          "exists": {
+                            "field": "encoded_vector"
+                          }
+                        },
+                        {
+                            "term": {
+                                "user_id": {
+                                    "value": user
+                                } 
+                            }
+                        }
+                    ]
                 }
               }
             }
           }
         }
-        return self.es.search(index='images-index', body=q)
+        return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
+       
