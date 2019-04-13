@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>albm</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+
+  <!-- sidebar -->
+  <div class="sidebar">
+    <h2 class="main-title">albm</h2>
+    <div class="md-form search">
+        <input type="text" id="search" class="form-control">
+        <label for="form1" class="searchlabel">search</label>
+    </div>
+    <h4 class="smart-title">Smart Albums</h4>
+    <div class="smart-buttons-container">
+        <button type="button" class="btn waves-effect btn-color1 waves-light">Dog</button>
+        <button type="button" class="btn waves-effect btn-color2 waves-light">Sunset</button>
+        <button type="button" class="btn waves-effect btn-color3 waves-light">Mountains</button>
+        <button type="button" class="btn waves-effect btn-color4 waves-light">Party</button>
+        <button type="button" class="btn waves-effect btn-color5 waves-light">Primary</button>
+    </div>
+    <h4 class="img-search-title">Image Search</h4>
+    <div style="margin: 15px; border: 1px dashed gray; height: 150px;"></div>
+    <!-- <form class="box" method="post" action="" enctype="multipart/form-data">
+      <div class="box__input">
+        <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
+        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+        <button class="box__button" type="submit">Upload</button>
+      </div>
+      <div class="box__uploading">Uploading&hellip;</div>
+      <div class="box__success">Done!</div>
+      <div class="box__error">Error! <span></span>.</div>
+    </form> -->
+  </div>
+
+  <!-- main view -->
+  <div class="main">
+    <h2 class="main-side-title">my photos</h2>
+    <div class="large-photo-container" id="photo-container"></div>
+    <div class="pic-container">
+      <div class="grid">
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+  
+  <script>
+  var isAdvancedUpload = function() {
+    var div = document.createElement('div');
+      return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+    }();
+    var $form = $('.box');
+
+    if (isAdvancedUpload) {
+      var droppedFiles = false;
+
+      $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      })
+      .on('dragover dragenter', function() {
+        $form.addClass('is-dragover');
+      })
+      .on('dragleave dragend drop', function() {
+        $form.removeClass('is-dragover');
+      })
+      .on('drop', function(e) {
+        droppedFiles = e.originalEvent.dataTransfer.files;
+      });
+
+      }
+  </script>
+
+  <!-- isotope -->
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="{{url_for('static', filename='cells-by-row.js')}}"></script>
+  <script src="{{url_for('static', filename='cells-by-col.js')}}"></script>
+  <script src="{{url_for('static', filename='isotope.js')}}"></script>
+  <script src="{{url_for('static', filename='shift-display.js')}}"></script>
+</body>
+</html>
