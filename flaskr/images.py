@@ -1,6 +1,7 @@
 import functools
 from client.vision import VisionClient
-# from flaskr.__init__ import vc
+from flaskr.__init__ import vc, ml
+from flaskr.__init__ import ml
 
 from flask import (
     Flask, Blueprint, flash, g, redirect, render_template, request,
@@ -66,12 +67,20 @@ def upload_image(username):
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        
+
+    # TODO: Change this to the URL we get after uploading to GCS
+    url = 'https://storage.googleapis.com/hack-sc-project/images/markhuds/party.jpeg'
+
+    # get prediction vector from ML Model
+    vector = ml.vectorize(url)
+    labels = vc.annotate(url)
+
+    print(labels)
 
     """
         TODO:
             1. Generate Unique File Name
-            2. Run inferences through both models
+            2. Run inferences through both models X
             3. Upload to Google Cloud 
     """
 
@@ -79,7 +88,9 @@ def upload_image(username):
         {
             'msg': 'image uploaded!',
             'username': username,
-            'filename': filename
+            'filename': filename,
+            'vector': vector,
+            'labels': labels
         }
     )
 

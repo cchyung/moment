@@ -16,12 +16,12 @@
 $(document).ready(() => {
   // retrieves images and renders them
   getImages('markhuds', renderImages);
+  // setupUpload()
   
 })
 
 // appends images to image container
 function renderImages(images) {
-  console.log(images)
   let imageContainer = $("#image-container")
   let htmlToAppend = ``
   images['images'].forEach((image) => {
@@ -33,21 +33,22 @@ function renderImages(images) {
   imageContainer.append(htmlToAppend)
 }
 
+// function setupUpload() {
+  Dropzone.options.myAwesomeDropzone = {
+    // autoProcessQueue: false,
+    init: function() {
+      this.on("success", function(file, response) { 
+        console.log(`${file.name} uploaded successfully`)
+      });
 
-Dropzone.options.myAwesomeDropzone = {
-  autoProcessQueue: false,
-  init: function() {
-    this.on("addedfile", function(file) { 
-      var files = $('.dropzone').get(0).dropzone.getAcceptedFiles();
-      // var formData = new FormData();
-      // formData.append('files', files[0]);
-      console.log(file)
-      uploadImage("markhuds", files[0], (data) => {
-        console.log("file uploaded!")
+      this.on("complete", function(file) {
+        setTimeout(() => { this.removeFile(file) }, 2000);
       })
-      // call client upload image method
-    });
-  }
-};
+    }
+  };
+// }
+
+
+
 
 

@@ -2,10 +2,11 @@ import os
 
 from flask import Flask
 
-from client.vision import VisionClient
+from client.vision import VisionClient, MLClient
 
-# vc = VisionClient()
-# es_client = ESClient()
+es_client = ESClient()
+vc = VisionClient()
+ml = MLClient()
 
 def create_app(test_config=None):
     # create and configure the app
