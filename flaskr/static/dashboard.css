@@ -50,6 +50,7 @@ input {
   font-weight: 500;
   margin-bottom: 0 !important;
   padding-bottom: 0;
+  margin-top: 2.5rem;
 }
 
 .smart-buttons-container {
@@ -96,25 +97,20 @@ input {
   font-weight: 300 !important;
 }
 
-.box__dragndrop,
-.box__uploading,
-.box__success,
-.box__error {
-  display: none;
+.dropzone-container {
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-top: 15px;
 }
 
-.box.has-advanced-upload {
-  background-color: white;
-  outline: 2px dashed black;
-  outline-offset: -10px;
-}
-.box.has-advanced-upload .box__dragndrop {
-  display: inline;
+.dropzone {
+  min-height: 150px;
+  border: 2px dashed rgba(75, 83, 255, 0.5) !important;
+  background: white;
+  padding: 20px 20px;
 }
 
-.box.is-dragover {
-  background-color: grey;
-}
+
 
 /* MAIN */
 /* ------------------------------------------------------------ */
@@ -139,12 +135,20 @@ input {
 }
 
 .grid-item { 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 10rem;
   height: 10rem;
-  background-color: gray;
+  /* background-color: gray; */
   margin: 1.5rem; 
   margin-bottom: 1rem;
   margin-top: 1rem;
+}
+
+.grid-item img {
+  width: 100%;
+  
 }
 
 .grid-item--width2 { 

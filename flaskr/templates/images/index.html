@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>albm</title>
   <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='dropzone.css')}}">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -34,17 +35,11 @@
         <button type="button" class="btn waves-effect btn-color5 waves-light">Primary</button>
     </div>
     <h4 class="img-search-title">Image Search</h4>
-    <div style="margin: 15px; border: 1px dashed gray; height: 150px;"></div>
-    <!-- <form class="box" method="post" action="" enctype="multipart/form-data">
-      <div class="box__input">
-        <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
-        <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-        <button class="box__button" type="submit">Upload</button>
-      </div>
-      <div class="box__uploading">Uploading&hellip;</div>
-      <div class="box__success">Done!</div>
-      <div class="box__error">Error! <span></span>.</div>
-    </form> -->
+    <div class="dropzone-container">
+        <form action="/images/username/upload-image"
+            class="dropzone"
+            id="my-awesome-dropzone"></form>
+    </div>
   </div>
 
   <!-- main view -->
@@ -52,25 +47,8 @@
     <h2 class="main-side-title">my photos</h2>
     <div class="large-photo-container" id="photo-container"></div>
     <div class="pic-container">
-      <div class="grid">
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
-          <button class="grid-item waves-effect waves-light photo" id="photo">...</button>
+      <div id="image-container" class="grid">
+
       </div>
 
     </div>
@@ -120,8 +98,14 @@
   <!-- isotope -->
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
   <script src="{{url_for('static', filename='cells-by-row.js')}}"></script>
-  <script src="{{url_for('static', filename='cells-by-col.js')}}"></script>
+  <script src="{{url_for('static', filename='cells-by-column.js')}}"></script>
   <script src="{{url_for('static', filename='isotope.js')}}"></script>
   <script src="{{url_for('static', filename='shift-display.js')}}"></script>
+  <!-- dropzone -->
+  <script src="{{url_for('static', filename='dropzone.js')}}"></script>
+  <!-- index -->
+  <script src="{{url_for('static', filename='index.js')}}"></script>
+  <!-- client -->
+  <script src="{{url_for('static', filename='client.js')}}"></script>
 </body>
 </html>

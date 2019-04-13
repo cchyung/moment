@@ -4,7 +4,7 @@ from flask import Flask
 
 from client.vision import VisionClient
 
-vc = VisionClient()
+# vc = VisionClient()
 
 def create_app(test_config=None):
     # create and configure the app
