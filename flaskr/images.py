@@ -42,13 +42,12 @@ def get_images(username):
     returns list of all images and labels
     """
 
-    # TODO: Get image data from elastic search and return
+    images = es_client.getUserImages(username)
 
     return jsonify(
         {
-            'msg': 'this is the message endpoint',
             'username': username,
-            'images': [ image.__dict__ for image in dummy_images() ]
+            'images': images
         }
     )
 

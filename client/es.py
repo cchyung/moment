@@ -35,6 +35,28 @@ class ESClient:
         d = self.es.get(index="images-index", doc_type='doc', id=_id).get('_source')
         im = Image(d.get('user_id'), _id, d.get('source'), vector=d.get('vector'), labels=d.get('labels'))
         return im
+
+    def getUserImages(self, user, pageSize=20, page=0):
+      q = {
+        "size": pageSize,
+        "from": page * pageSize,
+        "_source": ["id", "user_id", "source", "labels"],
+        "query": {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "user_id": {
+                    "value": user
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+      return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
+
     
     def getAlbum(self, user, label, pageSize=20, page=0):
         q = {
