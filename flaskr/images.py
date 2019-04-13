@@ -1,6 +1,6 @@
 import functools
 from client.vision import VisionClient
-from flaskr.__init__ import vc
+# from flaskr.__init__ import vc
 
 from flask import (
     Blueprint, flash, g, redirect, render_template, request,
@@ -20,10 +20,10 @@ def get_labels():
     url = request.args.get('path', '')
 
     try:
-        result = vc.annotate('gs://' + url)
+        # result = vc.annotate('gs://' + url)
     except Exception as e:
-        vc.refresh_client()
-        result = vc.annotate('gs://' + url)
+        # vc.refresh_client()
+        # result = vc.annotate('gs://' + url)
         print("vc.annotate failed, getting client again")
         
     return jsonify({'msg': result})
