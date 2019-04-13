@@ -1,0 +1,76 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: es-client # this is for coordinating nodes which don't do as much heavy lifting as data, basically smart load balancer, also can handle reduce phase of search
+  labels:
+    component: es-client
+    role: client
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: es-client
+        role: client
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: client
+      initContainers:
+      - name: init-sysctl
+        image: busybox:1.27.2
+        command: ["/bin/sh","-c"]
+        args: ["sysctl -w vm.max_map_count=262144; chmod -R a+rwx /data"]
+        volumeMounts:
+          - name: storage
+            mountPath: /data
+        securityContext:
+          privileged: true
+      containers:
+      - name: es-client
+        image: us.gcr.io/hack-sc-project/elasticsearch-server:6.2.4-0.0.2
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: CLUSTER_NAME
+          value: es-cluster
+        - name: DISCOVERY_SERVICE
+          value: es-discovery
+        - name: NODE_MASTER
+          value: "false" # these nodes won't handle master tasks
+        - name: NODE_DATA
+          value: "false" # they won't handle data tasks either (indexing, searching)
+        - name: HTTP_ENABLE
+          value: "true" # these nodes will handle requests
+        - name: ES_JAVA_OPTS
+          value: -Xms3g -Xmx3g # min and max jvm heap size -- must be same
+        - name: NETWORK_HOST
+          value: _site_,_lo_
+        - name: PROCESSORS
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.cpu
+        resources:
+          limits:
+            cpu: 1.2 # amount of cpu cores/vcpu to give
+        ports:
+        - containerPort: 9200
+          name: http
+        livenessProbe:
+          tcpSocket:
+            port: transport
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+      volumes:
+        - emptyDir:
+            medium: ""
+          name: storage

@@ -1,0 +1,79 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: es-master
+  labels:
+    component: es-master
+    role: master
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        component: es-master
+        role: master
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: master
+      initContainers:
+      - name: init-sysctl
+        image: busybox:1.27.2
+        command: ["/bin/sh","-c"]
+        args: ["sysctl -w vm.max_map_count=262144; chmod -R a+rwx /data"] # revisit
+        volumeMounts:
+          - name: storage
+            mountPath: /data
+        securityContext:
+          privileged: true
+      containers:
+      - name: es-master
+        image: us.gcr.io/hack-sc-project/elasticsearch-server:6.2.4-0.0.2
+        imagePullPolicy: Always
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: CLUSTER_NAME
+          value: es-cluster
+        - name: DISCOVERY_SERVICE
+          value: es-discovery
+        - name: NUMBER_OF_MASTERS
+          # value: "2" #(master_eligible_nodes / 2) + 1
+          value: "1" # production (master_eligible_nodes / 2) + 1
+        - name: NODE_MASTER
+          value: "true" # means that this node will perform master tasks 
+        - name: NODE_INGEST
+          value: "false" # means that this node will not perform ingest tasks 
+        - name: NODE_DATA
+          value: "false"  # means that this node will not perform data tasks (indexing AND searching/aggregations) 
+        - name: HTTP_ENABLE
+          value: "false" # requests will not come to here
+        - name: ES_JAVA_OPTS
+          value: -Xms3g -Xmx3g # min and max jvm heap size -- must be same
+        - name: PROCESSORS
+          valueFrom:
+            resourceFieldRef:
+              resource: limits.cpu
+        resources:
+          limits:
+            cpu: 1.2 # amount of cpu cores/vcpu to give
+        ports:
+        - containerPort: 9300
+          name: transport
+        livenessProbe:
+          tcpSocket:
+            port: transport
+          initialDelaySeconds: 240
+          periodSeconds: 10
+        volumeMounts:
+        - name: storage
+          mountPath: /data
+      volumes:
+          - emptyDir:
+              medium: ""
+            name: storage

@@ -1,0 +1,39 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: es-kibana
+  labels:
+    component: es-kibana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+     component: es-kibana
+  template:
+    metadata:
+      labels:
+        component: es-kibana
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
+      containers:
+      - name: es-kibana
+        image: docker.elastic.co/kibana/kibana:6.2.4
+        imagePullPolicy: Always
+        env:
+        - name: CLUSTER_NAME
+          value: es-cluster
+        - name: ELASTICSEARCH_URL
+          value: http://es-client-service:9200
+        - name: ELASTICSEARCH_USERNAME
+          value: elastic
+        - name: ELASTICSEARCH_PASSWORD
+          value: espwd
+        - name: SERVER_MAXPAYLOADBYTES
+          value: "1073741824"
+        resources:
+          limits:
+            cpu: 0.5
+        ports:
+        - containerPort: 5601
+          name: http
