@@ -1,0 +1,166 @@
+html {
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* SIDEBAR */
+/* ------------------------------------------------------- */
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  background-color: #F1F1F1;
+}
+
+.main-title {
+  padding: 15px;
+  padding-bottom: 0;
+  margin-top: 15px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0 !important;
+  vertical-align: bottom;
+}
+
+.search {
+  margin: 15px;
+  background-color: white;
+  border-radius: 25px;
+}
+
+.searchlabel {
+  padding-left: 15px;
+}
+
+input {
+  border: none !important;
+  margin: 0 !important;
+}
+
+.md-form .form-control {
+  padding: .3rem 0 .7rem !important;
+}
+
+.smart-title,
+.img-search-title {
+  padding: 15px;
+  font-weight: 500;
+  margin-bottom: 0 !important;
+  padding-bottom: 0;
+}
+
+.smart-buttons-container {
+  margin: 10px;
+}
+
+.smart-button {
+  display: inline;
+}
+
+.btn-color1 {
+  background-color: #BD10E0 !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.btn-color2 {
+  background-color: #F5A623 !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.btn-color3 {
+  background-color: #7ED321 !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.btn-color4 {
+  background-color: #F33C53 !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.btn-color5 {
+  background-color: #4B53FF !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.btn {
+  padding: .5rem 1.5rem !important;
+  color: white !important;
+  font-weight: 300 !important;
+}
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}
+
+.box.has-advanced-upload {
+  background-color: white;
+  outline: 2px dashed black;
+  outline-offset: -10px;
+}
+.box.has-advanced-upload .box__dragndrop {
+  display: inline;
+}
+
+.box.is-dragover {
+  background-color: grey;
+}
+
+/* MAIN */
+/* ------------------------------------------------------------ */
+.main-side-title {
+  padding: 15px;
+  padding-left: 0;
+  padding-bottom: 0;
+  margin-top: 15px;
+  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 0 !important;
+  vertical-align: bottom;
+}
+
+.main {
+  width: 100%;
+  padding-left: 350px;
+}
+
+.pic-container {
+  margin: 2rem;
+}
+
+.grid-item { 
+  width: 10rem;
+  height: 10rem;
+  background-color: gray;
+  margin: 1.5rem; 
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.grid-item--width2 { 
+  width: 16rem; 
+  height: 16rem;
+}
+
+#container {
+  /* either of these will work for horizontal Isotope layouts */
+  height: 80%;
+  height: 480px;
+}
+
+.large-photo-container {
+  width: 100%;
+  transition-timing-function: ease-in-out;
+}
+
+
