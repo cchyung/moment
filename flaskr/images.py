@@ -19,11 +19,11 @@ def index():
 def get_labels():    
     url = request.args.get('path', '')
 
-    try:
-        # result = vc.annotate('gs://' + url)
-    except Exception as e:
-        # vc.refresh_client()
-        # result = vc.annotate('gs://' + url)
-        print("vc.annotate failed, getting client again")
+    # try:
+    #     # result = vc.annotate('gs://' + url)
+    # except Exception as e:
+    #     # vc.refresh_client()
+    #     # result = vc.annotate('gs://' + url)
+    #     print("vc.annotate failed, getting client again")
         
-    return jsonify({'msg': result})
+    return jsonify({'msg': url})
