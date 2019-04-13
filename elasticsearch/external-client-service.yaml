@@ -1,12 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: es-client-service
-  annotations:
-    cloud.google.com/load-balancer-type: "Internal"
+  name: external-client-service
   labels:
     component: es
-    role: client
 spec:
   selector:
     component: es
@@ -14,4 +11,8 @@ spec:
   ports:
   - name: http
     port: 9200
+    targetPort: http
   type: LoadBalancer
+  loadBalancerSourceRanges:
+  - 108.60.51.1/32
+  - 216.240.41.153/32
