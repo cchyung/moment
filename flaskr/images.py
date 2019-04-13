@@ -7,6 +7,8 @@ from flask import (
     session, url_for, jsonify
 )
 
+from .objects import *
+
 from werkzeug.utils import secure_filename
 
 from flaskr.db import get_db
@@ -41,7 +43,8 @@ def get_images(username):
     return jsonify(
         {
             'msg': 'this is the message endpoint',
-            'username': username
+            'username': username,
+            'images': [ image.__dict__ for image in dummy_images() ]
         }
     )
 
@@ -86,4 +89,19 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-# def dummy_images():
+urls = [
+    'https://storage.googleapis.com/hack-sc-project/images/markhuds/0.jpeg',
+    'https://storage.googleapis.com/hack-sc-project/images/markhuds/1.jpg',
+    'https://storage.googleapis.com/hack-sc-project/images/markhuds/2.jpg',
+    'https://storage.googleapis.com/hack-sc-project/images/markhuds/3.jpg',
+    'https://storage.googleapis.com/hack-sc-project/images/markhuds/party.jpeg'
+
+]
+
+def dummy_images():
+    images = []
+    for url in urls:
+        images.append(Image('markhuds', 0, url))
+
+    return images
+
