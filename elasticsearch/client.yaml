@@ -3,14 +3,14 @@ kind: Deployment
 metadata:
   name: es-client # this is for coordinating nodes which don't do as much heavy lifting as data, basically smart load balancer, also can handle reduce phase of search
   labels:
-    component: es-client
+    component: es
     role: client
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        component: es-client
+        component: es
         role: client
     spec:
       nodeSelector:
@@ -27,7 +27,7 @@ spec:
           privileged: true
       containers:
       - name: es-client
-        image: us.gcr.io/hack-sc-project/elasticsearch-server:6.2.4-0.0.2
+        image: us.gcr.io/hack-sc-project/elasticsearch-server:6.2.4-0.0.3
         imagePullPolicy: Always
         env:
         - name: NAMESPACE

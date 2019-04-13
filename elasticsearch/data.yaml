@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   name: es-data
   labels:
-    component: es-data
+    component: es
     role: data
 spec:
   serviceName: es-data
@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        component: es-data
+        component: es
         role: data
     spec:
       nodeSelector:
@@ -28,7 +28,7 @@ spec:
             privileged: true
       containers:
       - name: es-data
-        image: us.gcr.io/hack-sc-project/elasticsearch-server:6.2.4-0.0.2
+        image: us.gcr.io/hack-sc-project/elasticsearch-server:6.2.4-0.0.3
         imagePullPolicy: Always
         env:
         - name: NAMESPACE
@@ -58,7 +58,6 @@ spec:
         resources:
           limits:
             cpu: 1.2 # how many cores/vcpus available -- data nodes are the ones you want to beef up
-            memory: 5
         ports:
         - containerPort: 9300
           name: transport
