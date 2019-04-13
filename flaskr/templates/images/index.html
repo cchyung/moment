@@ -44,12 +44,15 @@
 
   <!-- main view -->
   <div class="main">
-    <h2 class="main-side-title">my photos</h2>
-    <div class="large-photo-container" id="photo-container"></div>
+    <h2 class="main-side-title" style="margin-bottom: 3rem">my photos</h2>
+    <div class="large-photo-container" id="photo-container">
+    </div>
     <div class="pic-container">
       <div id="image-container" class="grid">
-
-      </div>
+    </div>
+    <div class="pic-container" id="similar">
+            <div id="image-container" class="grid">
+    </div>
 
     </div>
 
@@ -97,15 +100,18 @@
 
   <!-- isotope -->
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+  <script src="{{url_for('static', filename='isotope.js')}}"></script>
   <script src="{{url_for('static', filename='cells-by-row.js')}}"></script>
   <script src="{{url_for('static', filename='cells-by-column.js')}}"></script>
-  <script src="{{url_for('static', filename='isotope.js')}}"></script>
-  <script src="{{url_for('static', filename='shift-display.js')}}"></script>
+  <script src="{{url_for('static', filename='packery-mode.pkgd.js')}}"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
   <!-- dropzone -->
   <script src="{{url_for('static', filename='dropzone.js')}}"></script>
   <!-- index -->
   <script src="{{url_for('static', filename='index.js')}}"></script>
   <!-- client -->
   <script src="{{url_for('static', filename='client.js')}}"></script>
+  <!-- shift handler -->
+  <script src="{{url_for('static', filename='shift-display.js')}}"></script>
 </body>
 </html>

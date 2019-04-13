@@ -1,18 +1,3 @@
-// window.onload = function(e){ 
-//   console.log("window loaded")
-//   $.ajax({
-//     url: "/images/username/index",
-//     type: 'GET',
-//     dataType: 'json', // added data type
-//     success: function(res) {
-//         console.log(res);
-//         let urls = res.images.forEach(element => {
-//           urls[element] = element.
-//         });
-//     }
-// });
-// }
-
 $(document).ready(() => {
   // retrieves images and renders them
   getImages('markhuds', renderImages);
@@ -30,7 +15,19 @@ function renderImages(images) {
       <div class="grid-item waves-effect waves-light photo" id="photo"><img src=${image['url']}></div>
     `
   })
-  imageContainer.append(htmlToAppend)
+  imageContainer.append(htmlToAppend);
+  var $grid = $('.grid').isotope({
+    // options
+    itemSelector: '.grid-item',
+    layoutMode: 'packery',
+    packery: {
+      gutter: 10
+    }
+  });
+  $grid.imagesLoaded().progress( function() {
+    $grid.isotope('layout');
+  });
+  
 }
 
 
@@ -49,5 +46,3 @@ Dropzone.options.myAwesomeDropzone = {
     });
   }
 };
-
-

@@ -19,7 +19,7 @@ html {
   padding: 15px;
   padding-bottom: 0;
   margin-top: 15px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 0 !important;
   vertical-align: bottom;
@@ -55,6 +55,7 @@ input {
 
 .smart-buttons-container {
   margin: 10px;
+  padding-left: 15px;
 }
 
 .smart-button {
@@ -98,8 +99,8 @@ input {
 }
 
 .dropzone-container {
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
   margin-top: 15px;
 }
 
@@ -119,9 +120,8 @@ input {
   padding-left: 0;
   padding-bottom: 0;
   margin-top: 15px;
-  font-weight: 500;
+  font-weight: 600;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 0 !important;
   vertical-align: bottom;
 }
 
@@ -138,8 +138,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 10rem;
   height: 10rem;
+  /* width: auto; */
   /* background-color: gray; */
   margin: 1.5rem; 
   margin-bottom: 1rem;
@@ -147,8 +147,16 @@ input {
 }
 
 .grid-item img {
+  height: 100%;
+}
+
+.selected-item {
+  height: 16rem;
+  width: 16rem;
+}
+
+.selected-item img {
   width: 100%;
-  
 }
 
 .grid-item--width2 { 
@@ -165,6 +173,28 @@ input {
 .large-photo-container {
   width: 100%;
   transition-timing-function: ease-in-out;
+  position: relative;
 }
 
+.bar {
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  height: 1px;
+  margin: 0 auto;
+  left: 5%;
+  border-bottom: 1px solid #969696;
+}
+
+.exit {
+  position: absolute !important;
+  right: 10%;
+  top:0;
+  border-radius: 25px !important;
+  background-color: #4B53FF !important;
+}
+
+#similar {
+  visibility: hidden;
+}
 
