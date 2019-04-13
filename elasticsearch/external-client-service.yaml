@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: external-client-service
+  labels:
+    component: es
+spec:
+  selector:
+    component: es
+    role: client
+  ports:
+  - name: http
+    port: 9200
+    targetPort: http
+  type: LoadBalancer
+  loadBalancerSourceRanges:
+  - 108.60.51.1/32
+  - 216.240.41.153/32
