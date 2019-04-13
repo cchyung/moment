@@ -1,7 +1,7 @@
 $("#image-container").on('click', ".photo", (function (e) {
   console.log("clicked!")
   $(this).removeClass('photo');
-  $(this).css({"position": "static"}).removeClass('grid-item').addClass('selected-item')
+  $(this).css({"position": "relative", "top": "0", "left": "0"}).removeClass('grid-item').addClass('selected-item')
   // $(this).animate({width: '15rem'})
   e.stopImmediatePropagation();
   $('#photo-container').animate({height:'20rem'}, {

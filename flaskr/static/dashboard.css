@@ -127,7 +127,7 @@ input {
 
 .main {
   width: 100%;
-  padding-left: 350px;
+  padding-left: 300px;
 }
 
 .pic-container {
@@ -138,12 +138,12 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 10rem;
+  height: 13rem;
   /* width: auto; */
   /* background-color: gray; */
-  margin: 1.5rem; 
-  margin-bottom: 1rem;
-  margin-top: 1rem;
+  margin: .5rem; 
+  margin-bottom: .5rem;
+  margin-top: .5rem;
 }
 
 .grid-item img {
@@ -152,11 +152,13 @@ input {
 
 .selected-item {
   height: 16rem;
-  width: 16rem;
+  vertical-align: middle;
 }
 
 .selected-item img {
-  width: 100%;
+  max-width: 40%;
+  margin-top: 5%;
+  margin-left: 3.5rem;
 }
 
 .grid-item--width2 { 
