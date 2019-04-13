@@ -1,7 +1,5 @@
 import functools
-# from flaskr.__init__ import vc, ml
-# from flaskr.__init__ import ml
-from flaskr.__init__ import es_client
+from flaskr.__init__ import vc, ml, es_client
 
 
 from client import storage
@@ -19,9 +17,9 @@ import PIL
 
 bp = Blueprint('auth', __name__, url_prefix='/images')
 
-@bp.route('/', methods=('GET',))
-def index():
-    return render_template('images/index.html')
+@bp.route('/<username>/', methods=('GET',))
+def index(username):
+    return render_template('images/index.html', username=username)
 
 @bp.route('/get-labels', methods=('GET',))
 def get_labels():    
@@ -51,6 +49,20 @@ def get_images(username):
         }
     )
 
+@bp.route('/<username>/search', methods=('GET',))
+def search(username):
+    query = request.args.get('query','')
+
+    # search
+    images = es_client.search(username, query)
+    
+    return jsonify({
+        'username': username,
+        'images': images
+    })
+
+
+
 @bp.route('/<username>/upload-image', methods=('POST',))
 def upload_image(username):
     """
@@ -72,21 +84,16 @@ def upload_image(username):
     
     buffer = BytesIO()
     file.save(buffer)
-    _id, file_name = storage.upload_image('markhuds', buffer.getvalue(), file.filename)
+    _id, file_name = storage.upload_image(username, buffer.getvalue(), file.filename)
 
-    # TODO: Change this to the URL we get after uploading to GCS
-    # file_name = storage.upload_image('markhuds', file)
-
-    url = f'hack-sc-project/images/markhuds/{file_name}'
+    url = f'hack-sc-project/images/{username}/{file_name}'
 
     print(url)
     
-    # get prediction vector from ML Model
-    # vector = ml.vectorize(f'https://storage.googleapis.com/{url}')
-    # labels = vc.annotate(f'https://storage.googleapis.com/{url}')
-    labels = []
-    vector = []
-    new_image = Image('markhuds', _id, url, vector, labels)
+    # get prediction vector from ML Models
+    vector = ml.vectorize(f'https://storage.googleapis.com/{url}')
+    labels = vc.annotate(f'https://storage.googleapis.com/{url}')
+    new_image = Image(username, _id, url, vector, labels)
     es_client.addImage(new_image)
 
     return jsonify(

@@ -32,7 +32,8 @@ class VisionClient:
             ]
         }
         
-        return p.annotate(body=d).execute()
+        res = p.annotate(body=d).execute()
+        return [a.get('description').lower() for a in res.get('responses')[0].get('labelAnnotations')]
 
     def refresh_client(self):
         self.vision = build('vision', 'v1', cache_discovery=False)
