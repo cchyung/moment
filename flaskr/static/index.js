@@ -1,8 +1,7 @@
 $(document).ready(() => {
   // retrieves images and renders them
-  getImages('markhuds', renderImages);
-  // setupUpload()
-  
+  username = location.href.split('/').slice(-2)[0]
+  getImages(username, renderImages);
 })
 
 // appends images to image container
@@ -23,7 +22,7 @@ function renderImages(images) {
     packery: {
       gutter: 10
     }
-  });
+  }); 
   $grid.imagesLoaded().progress( function() {
     $grid.isotope('layout');
   });
@@ -33,6 +32,7 @@ function renderImages(images) {
 // function setupUpload() {
   Dropzone.options.myAwesomeDropzone = {
     // autoProcessQueue: false,
+    acceptedFiles: '.png,.jpg,.jpeg,.JPEG,.JPG,.PNG',
     init: function() {
       this.on("success", function(file, response) { 
         console.log(`${file.name} uploaded successfully`)
@@ -41,6 +41,5 @@ function renderImages(images) {
       this.on("complete", function(file) {
         setTimeout(() => { this.removeFile(file) }, 2000);
       })
-      // call client upload image method
   }
 };
