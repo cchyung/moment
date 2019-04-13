@@ -20,7 +20,6 @@ function uploadImage(username, imageFile, callback)
 
     console.log(`uploading image ${imageFile}`);
     
-
     jQuery.ajax({
         url: `${ROOT_URL}/${username}/upload-image`,
         type: 'POST',
