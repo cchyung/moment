@@ -1,7 +1,8 @@
 import functools
-from client.vision import VisionClient
-from flaskr.__init__ import vc, ml
-from flaskr.__init__ import ml
+# from flaskr.__init__ import vc, ml
+# from flaskr.__init__ import ml
+
+from client import storage
 
 from flask import (
     Flask, Blueprint, flash, g, redirect, render_template, request,
@@ -9,10 +10,10 @@ from flask import (
 )
 
 from .objects import *
-
 from werkzeug.utils import secure_filename
-
 from flaskr.db import get_db
+from io import BytesIO
+import PIL
 
 bp = Blueprint('auth', __name__, url_prefix='/images')
 
@@ -67,13 +68,21 @@ def upload_image(username):
 
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+    
+    buffer = BytesIO()
+    file.save(buffer)
+    file_name = storage.upload_image('markhuds', buffer.getvalue(), file.filename)
 
     # TODO: Change this to the URL we get after uploading to GCS
-    url = 'https://storage.googleapis.com/hack-sc-project/images/markhuds/party.jpeg'
+    # file_name = storage.upload_image('markhuds', file)
 
+    url = f'https://storage.googleapis.com/hack-sc-project/images/markhuds/{file_name}'
+    print(url)
     # get prediction vector from ML Model
-    vector = ml.vectorize(url)
-    labels = vc.annotate(url)
+    # vector = ml.vectorize(url)
+    # labels = vc.annotate(url)
+    labels = []
+    vector = []
 
     print(labels)
 
