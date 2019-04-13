@@ -40,6 +40,7 @@ class ESClient:
         q = {
           "size": pageSize,
           "from": page * pageSize,
+          "_source": ["id", "user_id", "source", "labels"],
           "query": {
             "bool": {
               "must": [
@@ -52,7 +53,7 @@ class ESClient:
                 },
                 {
                   "term": {
-                    "labels": label
+                    "labels.keyword": label
                   }
                 }
               ]
@@ -60,7 +61,32 @@ class ESClient:
           }
         }
         return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
-        
+    
+    def search(self, user, search, pageSize=20, page=0):
+        q = {
+          "size": pageSize,
+          "from": page * pageSize,
+          "_source": ["id", "user_id", "source", "labels"],
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "user_id": {
+                      "value": user
+                    }
+                  }
+                },
+                {
+                  "match": {
+                    "labels": search
+                  }
+                }
+              ]
+            }
+          }
+        }
+        return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
     
     def vectorSimilaritySearch(self, _id, pageSize=20, page=0):
         im = self.getImage(_id)
@@ -109,4 +135,7 @@ class ESClient:
           }
         }
         return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
-       
+        
+#     def addAlbum():
+    
+#     def searchAlbum
