@@ -1,6 +1,3 @@
-"""
-    contains object classes for the server
-"""
 import json
 
 class BaseObject():
@@ -8,8 +5,8 @@ class BaseObject():
         return json.dumps(self.__dict__)
 
 class Image(BaseObject):
-    def __init__(self, user, id, url, vector=[], labels=[]):
-        self.id=id
+    def __init__(self, user, _id, url, vector=[], labels=[]):
+        self._id=_id
         self.url=url
         self.vector=vector
         self.labels=labels
@@ -19,8 +16,8 @@ class Image(BaseObject):
         return f'{self.user}-{self.id}'
 
 class Album(BaseObject):
-    def __init__(self, user, id, name, images=[]):
-        self.id=id
+    def __init__(self, user, _id, name, images=[]):
+        self._id=_id
         self.name=name
         self.images=images
         self.user=user

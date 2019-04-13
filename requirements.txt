@@ -88,3 +88,4 @@ webencodings==0.5.1
 Werkzeug==0.15.2
 widgetsnbextension==3.4.2
 wrapt==1.11.1
+elasticsearch>=6.0.0,<7.0.0

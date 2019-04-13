@@ -4,8 +4,8 @@ from flask import Flask
 
 from client.vision import VisionClient, MLClient
 
+es_client = ESClient()
 # vc = VisionClient()
-
 # ml = MLClient()
 
 def create_app(test_config=None):
