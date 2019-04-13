@@ -2,6 +2,9 @@ import os
 
 from flask import Flask
 
+from client.vision import VisionClient
+
+vc = VisionClient()
 
 def create_app(test_config=None):
     # create and configure the app
@@ -34,5 +37,6 @@ def create_app(test_config=None):
 
     from . import images
     app.register_blueprint(images.bp)
+    
 
     return app
