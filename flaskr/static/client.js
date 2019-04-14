@@ -13,15 +13,28 @@ function getImages(username, callback)
     })
 }
 
-function getMoreImages(username, page, callback) 
+// function getMoreImages(username, page, callback) 
+// {
+//     console.log(`retrieving more images for ${username}`)
+
+//     jQuery.ajax({
+//         url: `${ROOT_URL}/${username}/index`,
+//         type: 'get',
+//         data: {
+//             'page': page
+//         }
+//     }
+// }
+
+function getSimilarImages(username, imageId, callback) 
 {
-    console.log(`retrieving more images for ${username}`)
+    console.log(`retrieving similar images for ${username}`)
 
     jQuery.ajax({
-        url: `${ROOT_URL}/${username}/index`,
+        url: `${ROOT_URL}/${username}/similar`,
         type: 'get',
         data: {
-            'page': page
+            'imageId': imageId
         },
         success: (data) => {
             callback(data)
