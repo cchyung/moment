@@ -1,2 +1,3 @@
-# hack-sc
-Repo for Hack SC Project
+# Moment
+Photo discovery platform driven by AI
+
