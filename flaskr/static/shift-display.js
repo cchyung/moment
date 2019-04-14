@@ -80,10 +80,12 @@ $("#image-container").on('click', ".photo", (function (e) {
     $('#similar').css('visibility', 'visible')
   }
   else {
-    $('#first-main').append(similar)
+    $('#first-main').append(similar).ready(() => {
+      $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+    })
   }
 
-  $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  
   
 }));
 
