@@ -1,5 +1,9 @@
 import functools
-from flaskr.__init__ import vc, ml, es_client
+from flaskr.__init__ import LOAD_CLIENT
+if(LOAD_CLIENT):
+    from flaskr.__init__ import vc, ml, es_client
+else:
+   from flaskr.__init__ import es_client 
 
 
 from client import storage
@@ -91,8 +95,13 @@ def upload_image(username):
     print(url)
     
     # get prediction vector from ML Models
-    vector = ml.vectorize(f'https://storage.googleapis.com/{url}')
-    labels = vc.annotate(f'https://storage.googleapis.com/{url}')
+    if(LOAD_CLIENT):
+        vector = ml.vectorize(f'https://storage.googleapis.com/{url}')
+        labels = vc.annotate(f'https://storage.googleapis.com/{url}')
+    else:
+        vector=[]
+        labels=[]
+        
     new_image = Image(username, _id, url, vector, labels)
     es_client.addImage(new_image)
 

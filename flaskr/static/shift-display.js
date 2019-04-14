@@ -1,3 +1,45 @@
+let searchVisible = false
+let indexVisible = true
+
+searchView = $('#search-view')
+indexView = $('#index-view')
+
+function showSearch() {
+  if(!searchVisible){
+    searchView.show()
+    searchView.removeClass('hidden')
+    searchVisible = true
+  }
+}
+
+function hideSearch() {
+  if(searchVisible) {
+    searchView.addClass('hidden')
+    setTimeout(() => {
+      searchView.hide()
+    }, 500)
+    searchVisible = false
+  }
+}
+
+function showIndex() {
+  if(!indexVisible){
+    indexView.show()
+    indexView.removeClass('hidden')
+    indexVisible = true
+  }
+}
+
+function hideIndex() {
+  if(indexVisible) {
+    indexView.addClass('hidden')
+    setTimeout(() => {
+      indexView.hide()
+    }, 500)
+    indexVisible = false
+  }
+}
+
 $("#image-container").on('click', ".photo", (function (e) {
   console.log("clicked!")
   $(this).removeClass('photo');

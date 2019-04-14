@@ -5,9 +5,14 @@ from flask import Flask
 from client.vision import VisionClient, MLClient
 from client.es import ESClient
 
+LOAD_CLIENT = False
+if(LOAD_CLIENT):
+    vc = VisionClient()
+    ml = MLClient()
+
 es_client = ESClient()
-vc = VisionClient()
-ml = MLClient()
+
+
 
 def create_app(test_config=None):
     # create and configure the app
