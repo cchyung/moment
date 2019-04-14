@@ -165,7 +165,8 @@ input {
 }
 
 .selected-item img {
-  max-width: 40%;
+  max-height:100%; 
+  max-width:100%;
   margin-top: 5%;
   margin-left: 3.5rem;
 }
@@ -244,4 +245,14 @@ input {
 .similarity-score {
   position: relative;
   /* text-align: center; */
+}
+
+.selected-photo {
+  display: inline-block;
+  width: 40%;
+}
+
+.selected-tags {
+  display: inline-block;
+  width: 39%;
 }

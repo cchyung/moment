@@ -64,7 +64,7 @@ $("#image-container").on('click', ".photo", (function (e) {
     duration: 400,
     easing: "easeInOutQuad",
   });
-  $(this).appendTo("#photo-container");
+  $(this).appendTo("#photo-was-selected");
   $('#photo-container').css({"pading-right": "10px",}).append(
     `
     <div class="bar"></div>
