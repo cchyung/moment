@@ -67,6 +67,29 @@ class ESClient:
         return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
 
     
+    def getUserTopTags(self, user):
+        q = {
+          "size": 0,
+          "query": {
+            "term": {
+              "user_id": {
+                "value": user
+              }
+            }
+          },
+          "aggs": {
+            "tags": {
+              "terms": {
+                "field": "labels.keyword",
+                "size": 5
+              }
+            }
+          }
+        }
+        buckets = self.es.search(index='images-index', body=q).get('aggregations', {}).get('tags', {}).get('buckets', [])
+        return [b.get('key', '') for b in buckets]
+    
+    
     def getAlbum(self, user, label, pageSize=20, page=0):
         q = {
           "size": pageSize,
