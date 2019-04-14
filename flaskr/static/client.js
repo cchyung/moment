@@ -29,3 +29,17 @@ function uploadImage(username, imageFile, callback)
         }
     })
 }
+
+function searchQuery(username, query, callback)
+{
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/search`,
+        type: 'GET',
+        data: {
+            'query': query
+        },
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
