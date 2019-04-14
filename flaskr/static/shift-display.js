@@ -84,9 +84,6 @@ $("#image-container").on('click', ".photo", (function (e) {
       $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
     })
   }
-
-  
-  
 }));
 
 function renderSimilar(images) {
