@@ -3,10 +3,24 @@
 # Moment
 Photo discovery platform driven by AI
 
-A Project for HackSC 2019
+A Project for [HackSC 2019](https://devpost.com/software/moment-ebftnh)
 
 ## Description
-Moment lets you navigate through your photo library through similar photos and generates tags that let you easily search through your library.
+Moment lets you navigate through your photo library through similar photos and search through your photo library with text and images.
+
+### Features
+#### Personal Reverse Image Search
+Having trouble finding that picture of you at the Leaning Tower of Pisa? Use reverse image search with any picture of the famed landmark and find that moment in your own photo library!
+
+#### Similar Image Explore
+With Moment, you can explore your photo library through similar images.
+
+#### Filter by Smart Tags
+Moment automatically generates semantic tags for all of your images and allows you to filter by tags such as "Dog", "Ocean", "Mountains", etc.
+
+#### Text Search
+Moment lets you search through your library with text to help you find all those photos you took of your cat.
+
 
 ### How it Works
 1. Users may upload images by dragging them into the application
