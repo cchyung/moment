@@ -1,8 +1,55 @@
+//initial detatch of similar 
+let initial = $('#initial')
+let similar = $('#similar')
+let isInitialVisible = true
+let isSimilarVisible = false
+
 let searchVisible = false
 let indexVisible = true
 
 searchView = $('#search-view')
 indexView = $('#index-view')
+
+function showSimilar() {
+  if(!isSimilarVisible){
+    // similar.show()
+    // similar.removeClass('hidden')
+    similar.css('visibility', 'hidden')
+    $('#first-main').append(similar)
+    isSimilarVisible = true
+  }
+}
+
+function hideSimilar() {
+  if(isSimilarVisible) {
+    // similar.addClass('hidden')
+    // setTimeout(() => {
+    //   similar.hide()
+    // }, 500)
+    similar = similar.detach()
+    isSimilarVisible = false
+  }
+}
+
+function showInitial() {
+  if(!isInitialVisible){
+    // initial.show()
+    // initial.removeClass('hidden')
+    $('#first-main').append(similar)
+    isInitialVisible = true
+  }
+}
+
+function hideInitial() {
+  if(isInitialVisible) {
+    // similar.addClass('hidden')
+    // setTimeout(() => {
+    //   initial.hide()
+    // }, 500)
+    initial = initial.detach()
+    isInitialVisible = false
+  }
+}
 
 function showSearch() {
   if(!searchVisible){
@@ -59,10 +106,16 @@ $("#image-container").on('click', ".photo", (function (e) {
     </a>
     `
   )
-  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  hideInitial()
+  showSimilar()
+  // $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }));
 
 $('#photo-container').on('click', '.exit', (function (e) {
+  hideSimilar()
+  setTimeout(() => {
+    showInitial()
+  }, 500);
   let photo = $('.selected-item')
   photo.appendTo("#image-container");
   $('#photo-container').animate({height:'0px'}, {

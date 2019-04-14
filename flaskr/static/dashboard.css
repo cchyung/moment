@@ -132,9 +132,8 @@ input {
   transition: 0.2s ease opacity;
 }
 
-.main.hidden {
+.hidden {
   opacity: 0;
-  
 }
 
 .pic-container {
@@ -204,7 +203,26 @@ input {
   background-color: #4B53FF !important;
 }
 
+.similar-title {
+  padding: 15px;
+  font-weight: 500;
+  margin-bottom: 0 !important;
+  padding-bottom: 0;
+  margin-top: 2.5rem;
+}
+
+.create-album {
+  margin-top: -10px !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.placeholder {
+  width: 9rem;
+  height: 9rem;
+  background-color: #969696;
+}
+
 #similar {
   visibility: hidden;
 }
-
