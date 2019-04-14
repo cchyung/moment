@@ -9,6 +9,24 @@ $(document).ready(() => {
   loadTags()
 })
 
+$('.all-btn').click(function() {
+  $('#image-container').isotope({ filter: '*' });
+})
+
+$('.btn-color1').click(function() {
+  console.log('changing')
+  $('#image-container').isotope({
+    // filter element with numbers greater than 50
+    filter: function() {
+      // _this_ is the item element. Get text of element's .number
+      var nums = ['21ce63f6e34d384d81d45dd17acec8e3','908450855ae50afe5f8d08cc122210be', '0419182f02cf02574b2f983d17699493']
+      var number = $(this).data('image-id')
+      // return true to show, false to hide
+      return nums.includes(number);
+    }
+  })
+})
+
 // appends images to image container
 function renderImages(images) {
   let imageContainer = $("#image-container")
