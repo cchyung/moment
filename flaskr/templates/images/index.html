@@ -36,7 +36,7 @@
     </div>
     <h4 class="img-search-title">Image Search</h4>
     <div class="dropzone-container">
-        <form action="/images/username/upload-image"
+        <form action="/images/{{ username }}/upload-image"
             class="dropzone"
             id="my-awesome-dropzone"></form>
     </div>
@@ -62,14 +62,19 @@
             <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
         </div>
     </div>
-</div>
+  </div>
 
-    <div id="search-view" class="main hidden">
-            <h2 class="main-side-title" style="margin-bottom: 3rem">search results</h2>
-            <div class="pic-container">
-              <div id="search-results-container" class="grid"></div>
-            </div>
+  <div id="search-view" class="main hidden">
+    <h2 class="main-side-title" style="margin-bottom: 3rem">search results</h2>
+    <div class="pic-container">
+      <div id="search-results-container" class="grid"></div>
     </div>
+  </div>
+
+  <div class='load-more main'>
+    <button id="load-more-btn" class='btn'>Load More</button>
+  </div>
+
 
   <!-- SCRIPTS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">

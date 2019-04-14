@@ -1,14 +1,11 @@
 currentUser = location.href.split('/').slice(-2)[0] 
+currentPage = 1
 
 $(document).ready(() => {
   // retrieves images and renders them
   getImages(currentUser, renderImages);
   initSearch()
 })
-
-
-
-
 
 // appends images to image container
 function renderImages(images) {
@@ -34,7 +31,14 @@ function renderImages(images) {
   });
 }
 
+/* ======== Load More ======== */
+function setupMore() {
+  $('load-more-btn').click(loadMoreImages);
+}
 
+function loadMoreImages() {
+  getMoreImages(currentUser, currentPage + 1, renderImages)
+}
 
 /* ======== Search ======== */
 function initSearch() {

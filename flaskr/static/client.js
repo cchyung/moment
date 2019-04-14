@@ -13,6 +13,22 @@ function getImages(username, callback)
     })
 }
 
+function getMoreImages(username, page, callback) 
+{
+    console.log(`retrieving more images for ${username}`)
+
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/index`,
+        type: 'get',
+        data: {
+            'page': page
+        },
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
 function uploadImage(username, imageFile, callback)
 {
     let formData = new FormData()
