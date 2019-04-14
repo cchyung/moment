@@ -20,7 +20,7 @@ function hideSearch() {
     searchView.addClass('hidden')
     setTimeout(() => {
       searchView.hide()
-    }, 200)
+    }, 400)
     searchVisible = false
   }
 }

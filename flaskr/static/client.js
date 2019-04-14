@@ -103,7 +103,7 @@ function getImagesForTag(username, tag, callback) {
         url: `${ROOT_URL}/${username}/get-album`,
         type: 'GET',
         data: {
-            'tag': tag
+            'label': tag
         },
         success: (data) => {
             callback(data)
