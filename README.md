@@ -11,15 +11,21 @@ Moment lets you navigate through your photo library through similar photos and s
 ### Features
 #### Personal Reverse Image Search
 Having trouble finding that picture of you at the Leaning Tower of Pisa? Use reverse image search with any picture of the famed landmark and find that moment in your own photo library!
+<img src="https://github.com/cchyung/moment/blob/master/res/screencaps/pisa.png" style="float: right;" width="500"/>
 
 #### Similar Image Explore
 With Moment, you can explore your photo library through similar images.
+<img src="https://github.com/cchyung/moment/blob/master/res/screencaps/similar.png" style="float: right;" width="500"/>
+<img src="https://github.com/cchyung/moment/blob/master/res/screencaps/similar2.png" style="float: right;" width="500"/>
 
 #### Filter by Smart Tags
 Moment automatically generates semantic tags for all of your images and allows you to filter by tags such as "Dog", "Ocean", "Mountains", etc.
+<img src="https://github.com/cchyung/moment/blob/master/res/screencaps/tag.png" style="float: right;" width="500"/>
+<img src="https://github.com/cchyung/moment/blob/master/res/screencaps/tag2.png" style="float: right;" width="500"/>
 
 #### Text Search
 Moment lets you search through your library with text to help you find all those photos you took of your cat.
+<img src="https://github.com/cchyung/moment/blob/master/res/screencaps/search.png" style="float: right;" width="500"/>
 
 
 ### How it Works
