@@ -20,7 +20,7 @@ function hideSearch() {
     searchView.addClass('hidden')
     setTimeout(() => {
       searchView.hide()
-    }, 500)
+    }, 200)
     searchVisible = false
   }
 }
@@ -38,7 +38,7 @@ function hideIndex() {
     indexView.addClass('hidden')
     setTimeout(() => {
       indexView.hide()
-    }, 500)
+    }, 200)
     indexVisible = false
   }
 }

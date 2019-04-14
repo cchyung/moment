@@ -13,6 +13,35 @@ function getImages(username, callback)
     })
 }
 
+// function getMoreImages(username, page, callback) 
+// {
+//     console.log(`retrieving more images for ${username}`)
+
+//     jQuery.ajax({
+//         url: `${ROOT_URL}/${username}/index`,
+//         type: 'get',
+//         data: {
+//             'page': page
+//         }
+//     }
+// }
+
+function getSimilarImages(username, imageId, callback) 
+{
+    console.log(`retrieving similar images for ${username}`)
+
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/similar`,
+        type: 'get',
+        data: {
+            'imageId': imageId
+        },
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
 function uploadImage(username, imageFile, callback)
 {
     let formData = new FormData()
@@ -24,6 +53,20 @@ function uploadImage(username, imageFile, callback)
         url: `${ROOT_URL}/${username}/upload-image`,
         type: 'POST',
         data: formData,
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
+function searchQuery(username, query, callback)
+{
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/search`,
+        type: 'GET',
+        data: {
+            'query': query
+        },
         success: (data) => {
             callback(data)
         }

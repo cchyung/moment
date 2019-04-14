@@ -129,7 +129,7 @@ input {
   width: 100%;
   padding-left: 300px;
   opacity: 1;
-  transition: 0.5s ease opacity;
+  transition: 0.2s ease opacity;
 }
 
 .hidden {
@@ -225,4 +225,10 @@ input {
 
 #similar {
   visibility: hidden;
+}
+
+#load-more-btn {
+  margin: 0 auto;
+  display: block;
+  background-color: blue;
 }

@@ -64,6 +64,9 @@
                 },
                 "encoded_vector": {
                     "type": "keyword"
+                },
+                "timestamp": {
+                    "type": "integer"
                 }
             }
         }

@@ -1,13 +1,11 @@
+currentUser = location.href.split('/').slice(-2)[0] 
+currentPage = 1
+
 $(document).ready(() => {
   // retrieves images and renders them
-  username = location.href.split('/').slice(-2)[0]
-  getImages(username, renderImages);
+  getImages(currentUser, renderImages);
   initSearch()
 })
-
-
-
-
 
 // appends images to image container
 function renderImages(images) {
@@ -33,13 +31,20 @@ function renderImages(images) {
   });
 }
 
+/* ======== Load More ======== */
+function setupMore() {
+  $('load-more-btn').click(loadMoreImages);
+}
 
+function loadMoreImages() {
+  getMoreImages(currentUser, currentPage + 1, renderImages)
+}
 
 /* ======== Search ======== */
 function initSearch() {
   hideSearch()
   searchBar = $('#search')
-  searchBar.keydown(search)
+  searchBar.keydown(searchDebounced)
 }
 
 var searchDebounced = debounce(function (e) {
@@ -48,19 +53,47 @@ var searchDebounced = debounce(function (e) {
     hideIndex();
     setTimeout(() => {
       showSearch();  
-    }, 500)
+    }, 200)
+    searchQuery(currentUser, query, renderSearch);
     
   } else {
     hideSearch();
     setTimeout(() => {
       showIndex();
-    }, 500)
+    }, 200)
+    
   }
-}, 100);
+}, 500);
 
-function search(e) {
-    e.stopPropagation();
-    searchDebounced(e);
+// function search(e) {
+//     if(e.keypress)
+
+//     query = $('#search').val()
+//     searchQuery(currentUser, query, renderSearch);
+// }
+
+function renderSearch(images) {
+  let imageContainer = $("#search-results-container")
+  imageContainer.empty()
+  let htmlToAppend = ``
+  images['images'].forEach((image) => {
+    htmlToAppend += 
+    `
+      <div class="grid-item waves-effect waves-light photo" id="photo"><img src=https://storage.googleapis.com/${image['source']}></div>
+    `
+  })
+  imageContainer.append(htmlToAppend);
+  var $grid = $('.grid').isotope({
+    // options
+    itemSelector: '.grid-item',
+    layoutMode: 'packery',
+    packery: {
+      gutter: 10
+    }
+  }); 
+  $grid.imagesLoaded().progress( function() {
+    $grid.isotope('layout');
+  });
 }
 
 function debounce(func, wait, immediate) {

@@ -69,6 +69,7 @@ class MLClient:
     
     def vectorize(self, url):
         img = Image.open(requests.get(url, stream=True).raw)
+        img.thumbnail((299, 299), Image.ANTIALIAS)
         resized_image = make_square(img)
         buffer = BytesIO()
         resized_image.save(buffer, format='JPEG')
