@@ -100,29 +100,48 @@ function loadMoreImages() {
   getMoreImages(currentUser, currentPage + 1, renderImages)
 }
 
-/* ======== Search ======== */
+/* ======== Search ================================== */
 function initSearch() {
+  // tag = $('#search').val()
+  // console.log(tag)
+  // if(!tag.length == 0) {
+  //   console.log('triggered!')
+  //   getImagesForTag(currentUser, tag, applyFilter)
+  // }
   searchBar = $('#search')
   searchBar.keydown(searchDebounced)
-  hideSearch()
+  // hideSearch()
 }
 
 var searchDebounced = debounce(function (e) {
   query = $('#search').val()
-  if(query.length != 0) {
-    hideIndex();
-    setTimeout(() => {
-      showSearch();  
-    }, 200)
-    searchQuery(currentUser, query, renderSearch);
-    
-  } else {
-    hideSearch();
-    setTimeout(() => {
-      showIndex();
-    }, 200)
+  if(!query.length == 0) {
+    console.log('triggered!')
+    getImagesForTag(currentUser, query, applyFilter)
+  }
+  else {
+    $('#image-container').isotope({ filter: '*' });
   }
 }, 500);
+
+// var searchDebounced = debounce(function (e) {
+//   query = $('#search').val()
+//   if(query.length != 0) {
+//     hideIndex();
+//     setTimeout(() => {
+//       showSearch();  
+//     }, 200)
+//     searchQuery(currentUser, query, renderSearch);
+    
+//   } else {
+//     hideSearch();
+//     setTimeout(() => {
+//       showIndex();
+//     }, 200)
+//   }
+// }, 500);
+
+//------------------------------------------------
 
 // function search(e) {
 //     if(e.keypress)

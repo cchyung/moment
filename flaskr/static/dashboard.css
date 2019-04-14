@@ -186,7 +186,7 @@ input {
 
 .pic-container {
   margin: 2rem;
-  margin-top: -1rem;
+  margin-top: .7rem;
 }
 
 .grid-item { 
@@ -235,6 +235,7 @@ input {
   width: 100%;
   transition-timing-function: ease-in-out;
   position: relative;
+  height: 0;
 }
 
 .bar {
