@@ -8,13 +8,8 @@ A Project for HackSC 2019
 ## Description
 Moment lets you navigate through your photo library through similar photos and generates tags that let you easily search through your library.
 
-### Pitch Deck
-<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/0.png" width="500"/>
-<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/1.png" width="500"/>
-<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/2.png" width="500"/>
-<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/3.png" width="500"/>
-
 ### Screen Cap
+<img src="https://github.com/cchyung/moment/blob/master/res/screencap.gif" style="float: right;" width="500"/>
 
 ### Technologies
 Moment is powered by the following technologies:
@@ -22,4 +17,10 @@ Moment is powered by the following technologies:
  - Flask (Backend Server)
  - Isotope.js (Tiling for frontend)
  - Dropzone.js (For easy file upload)
+
+### Pitch Deck
+<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/0.png" style="float: right;" width="500"/>
+<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/1.png" style="float: right;" width="500"/>
+<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/2.png" style="float: right;" width="500"/>
+<img src="https://github.com/cchyung/moment/blob/master/res/pitch%20deck/3.png" style="float: right;" width="500"/>
 
