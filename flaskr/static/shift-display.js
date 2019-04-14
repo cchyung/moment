@@ -1,8 +1,91 @@
 //initial detatch of similar 
-let initial, similar;
-isInitialVisible = true;
-isSimilarVisible = false;
+let initial = $('#initial')
+let similar = $('#similar')
+let isInitialVisible = true
+let isSimilarVisible = false
 
+let searchVisible = false
+let indexVisible = true
+
+searchView = $('#search-view')
+indexView = $('#index-view')
+
+function showSimilar() {
+  if(!isSimilarVisible){
+    // similar.show()
+    // similar.removeClass('hidden')
+    similar.css('visibility', 'hidden')
+    $('#first-main').append(similar)
+    isSimilarVisible = true
+  }
+}
+
+function hideSimilar() {
+  if(isSimilarVisible) {
+    // similar.addClass('hidden')
+    // setTimeout(() => {
+    //   similar.hide()
+    // }, 500)
+    similar = similar.detach()
+    isSimilarVisible = false
+  }
+}
+
+function showInitial() {
+  if(!isInitialVisible){
+    // initial.show()
+    // initial.removeClass('hidden')
+    $('#first-main').append(similar)
+    isInitialVisible = true
+  }
+}
+
+function hideInitial() {
+  if(isInitialVisible) {
+    // similar.addClass('hidden')
+    // setTimeout(() => {
+    //   initial.hide()
+    // }, 500)
+    initial = initial.detach()
+    isInitialVisible = false
+  }
+}
+
+function showSearch() {
+  if(!searchVisible){
+    searchView.show()
+    searchView.removeClass('hidden')
+    searchVisible = true
+  }
+}
+
+function hideSearch() {
+  if(searchVisible) {
+    searchView.addClass('hidden')
+    setTimeout(() => {
+      searchView.hide()
+    }, 500)
+    searchVisible = false
+  }
+}
+
+function showIndex() {
+  if(!indexVisible){
+    indexView.show()
+    indexView.removeClass('hidden')
+    indexVisible = true
+  }
+}
+
+function hideIndex() {
+  if(indexVisible) {
+    indexView.addClass('hidden')
+    setTimeout(() => {
+      indexView.hide()
+    }, 500)
+    indexVisible = false
+  }
+}
 
 $("#image-container").on('click', ".photo", (function (e) {
   console.log("clicked!")
@@ -23,19 +106,16 @@ $("#image-container").on('click', ".photo", (function (e) {
     </a>
     `
   )
-  initial = $('#initial').detach()
-  if(!similar) {
-    $('#similar').css('visibility', 'visible')
-  }
-  else {
-    $('.main').append(similar)
-  }
-  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  hideInitial()
+  showSimilar()
+  // $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }));
 
 $('#photo-container').on('click', '.exit', (function (e) {
-  similar = $('#similar').detach()
-  $('.main').append(initial)
+  hideSimilar()
+  setTimeout(() => {
+    showInitial()
+  }, 500);
   let photo = $('.selected-item')
   photo.appendTo("#image-container");
   $('#photo-container').animate({height:'0px'}, {

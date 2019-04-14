@@ -43,7 +43,7 @@
   </div>
 
   <!-- main view -->
-  <div class="main">
+  <div class="main" id="first-main">
     <h2 class="main-side-title" style="margin-bottom: 3rem; padding-left: 50px">my photos</h2>
     <div class="large-photo-container" id="photo-container">
     </div>
@@ -62,8 +62,14 @@
             <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
         </div>
     </div>
+</div>
 
-  </div>
+    <div id="search-view" class="main hidden">
+            <h2 class="main-side-title" style="margin-bottom: 3rem">search results</h2>
+            <div class="pic-container">
+              <div id="search-results-container" class="grid"></div>
+            </div>
+    </div>
 
   <!-- SCRIPTS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
