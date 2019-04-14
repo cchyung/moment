@@ -29,9 +29,9 @@ function renderIsotopeSimilar() {
 
 function renderIsotope() {
   console.log('rerendering initial isotope')
-  // grid.imagesLoaded().progress( function() {
-  //   grid.isotope('layout');
-  // });
+  grid.imagesLoaded().progress( function() {
+    grid.isotope('layout');
+  });
   $('#image-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
   $('#image-container').isotope('layout')
 }

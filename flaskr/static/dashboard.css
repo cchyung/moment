@@ -181,6 +181,7 @@ input {
 
 .hidden {
   opacity: 0;
+  height: 0;
 }
 
 .pic-container {
@@ -283,6 +284,7 @@ input {
   margin: 0 auto;
   display: block;
   background-color: blue;
+  color: white;
 }
 
 .grid-item-similar {

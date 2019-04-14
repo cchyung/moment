@@ -1,6 +1,8 @@
 currentUser = location.href.split('/').slice(-2)[0] 
 currentPage = 0
 
+currentImages = []
+
 $(document).ready(() => {
   // retrieves images and renders them
   getImages(currentUser, renderImages);
@@ -13,29 +15,71 @@ $('.all-btn').click(function() {
   $('#image-container').isotope({ filter: '*' });
 })
 
-$('.btn-color1').click(function() {
-  console.log('changing')
-  $('#image-container').isotope({
+function initTags() {
+  $('.tag').on('click', function() {
+
+    tag = $(this).text()
+    getImagesForTag(currentUser, tag, applyFilter)
+  })
+}
+
+
+
+function applyFilter(images) {
+  ids = []
+  images['images'].forEach((image) => {
+    ids.push(image['id'])
+  })
+
+  console.log(ids)
+  imageContainer = $('#image-container')
+  let htmlToAppend = ``
+  images['images'].forEach((image) => {
+    if(!currentImages.includes(image['id'])){
+      currentImages.push(image['id'])
+      htmlToAppend = 
+      `
+        <div class="grid-item waves-effect waves-light photo" id="photo" data-image-id=${image['id']}><img src=https://storage.googleapis.com/${image['source']} ></div>
+      `
+      imageContainer.append(htmlToAppend);
+      renderIsotope()
+    }
+  })
+  
+  imageContainer.isotope({
+    itemSelector:'.grid-item',
+    layoutMode: 'packery',
+    packery: {
+      gutter: 10
+    }
+  });
+
+  $('#image-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+
+  imageContainer.isotope({
     // filter element with numbers greater than 50
     filter: function() {
       // _this_ is the item element. Get text of element's .number
-      var nums = ['21ce63f6e34d384d81d45dd17acec8e3','908450855ae50afe5f8d08cc122210be', '0419182f02cf02574b2f983d17699493']
+      var nums = ids
       var number = $(this).data('image-id')
       // return true to show, false to hide
       return nums.includes(number);
     }
   })
-})
+}
 
 // appends images to image container
 function renderImages(images) {
   let imageContainer = $("#image-container")
   let htmlToAppend = ``
   images['images'].forEach((image) => {
-    htmlToAppend += 
-    `
-      <div class="grid-item waves-effect waves-light photo" id="photo" data-image-id=${image['id']}><img src=https://storage.googleapis.com/${image['source']} ></div>
-    `
+    if(!currentImages.includes(image['id'])){
+      currentImages.push(image['id'])
+      htmlToAppend += 
+      `
+        <div class="grid-item waves-effect waves-light photo" id="photo" data-image-id=${image['id']}><img src=https://storage.googleapis.com/${image['source']} ></div>
+      `
+    }
   })
   imageContainer.append(htmlToAppend);
 
@@ -57,9 +101,9 @@ function loadMoreImages() {
 
 /* ======== Search ======== */
 function initSearch() {
-  hideSearch()
   searchBar = $('#search')
   searchBar.keydown(searchDebounced)
+  hideSearch()
 }
 
 var searchDebounced = debounce(function (e) {
@@ -151,8 +195,9 @@ function renderTags(tags) {
   tags['tags'].forEach((tag) => {
     htmlToAppend += 
     `
-    <button type="button" class="btn waves-effect btn-color${i++} waves-light">${tag}</button>
+    <button type="button" class="tag btn waves-effect btn-color${i++} waves-light">${tag}</button>
     `
   })
   tagContainer.append(htmlToAppend)
+  initTags()
 }

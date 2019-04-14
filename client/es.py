@@ -38,7 +38,7 @@ class ESClient:
         im = Image(d.get('user_id'), _id, d.get('source'), vector=d.get('vector'), labels=d.get('labels'))
         return im
 
-    def getUserImages(self, user, pageSize=10, page=0):
+    def getUserImages(self, user, pageSize=20, page=0):
         q = {
             "size": pageSize,
             "from": page * pageSize,
