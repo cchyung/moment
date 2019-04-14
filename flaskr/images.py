@@ -89,7 +89,25 @@ def get_tags(username):
         'labels': image.labels
     })
 
+@bp.route('/<username>/get-album', methods=('GET',))
+def get_tags(username):
+    label = request.args.get('label','')
 
+    images = es_client.getAlbum(username, label)
+    
+    return jsonify({
+        'username': username,
+        'images': images
+    })
+
+@bp.route('/<username>/get-top-tags', methods=('GET',))
+def get_tags(username):
+    tags = es_client.getUserTopTags(username)
+    
+    return jsonify({
+        'username': username,
+        'tags': tags
+    })
 
 @bp.route('/<username>/upload-image', methods=('POST',))
 def upload_image(username):
