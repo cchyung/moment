@@ -27,7 +27,12 @@ function hideSearch() {
 
 function showIndex() {
   if(!indexVisible){
-    indexView.show()
+    indexView.show( () => {
+      $('#image-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+      setTimeout(() => {
+        renderIsotope()
+      }, 300);
+    })
     indexView.removeClass('hidden')
     indexVisible = true
   }
@@ -80,12 +85,10 @@ $("#image-container").on('click', ".photo", (function (e) {
     $('#similar').css('visibility', 'visible')
   }
   else {
-    $('#first-main').append(similar).ready(() => {
-      $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
-    })
+    $('#first-main').append(similar)
   }
 
-  
+  $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
   
 }));
 
@@ -93,15 +96,16 @@ function renderSimilar(images) {
   let imageContainer = $("#similar-container")
   let htmlToAppend = ``
   images['images'].forEach((image) => {
-    htmlToAppend += 
+    htmlToAppend = 
     `
       <div class="grid-item waves-effect waves-light photo grid-item-similar" id="photo" data-image-id=${image['id']}>
         <img src=https://storage.googleapis.com/${image['source']}>
         <p class='similarity-score'>${image['score'].toFixed(2)}%</p>
       </div>
     `
+    imageContainer.append(htmlToAppend);
+    renderIsotopeSimilar();
   })
-  imageContainer.append(htmlToAppend);
 
   $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }
