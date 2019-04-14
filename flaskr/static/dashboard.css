@@ -181,6 +181,7 @@ input {
 
 .hidden {
   opacity: 0;
+  height: 0;
 }
 
 .pic-container {
