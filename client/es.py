@@ -26,6 +26,7 @@ class ESClient:
             'source': image.url,
             'timestamp': int(time.time())
         }
+
         if image.labels:
             doc['labels'] = image.labels
         if image.vector:
@@ -200,7 +201,7 @@ class ESClient:
           }
         }
         hits = self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])
-        scores = [hit.get('_score')/2.0*100 for hit in hits]
+        scores = [(hit.get('_score')/2.0*hit.get('_score')/2.0)*100 for hit in hits]
         details = [hit.get('_source') for hit in hits]
         response = []
         for i, details in enumerate(details):
