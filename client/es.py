@@ -133,8 +133,19 @@ class ESClient:
                   }
                 },
                 {
-                  "match": {
-                    "labels": search
+                  "bool": {
+                    "should": [
+                      {
+                        "match": {
+                          "labels": search
+                        }
+                      },
+                      {
+                        "prefix": {
+                          "labels": search
+                        }
+                      }
+                    ]
                   }
                 }
               ]

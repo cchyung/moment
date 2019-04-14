@@ -117,7 +117,7 @@ var searchDebounced = debounce(function (e) {
   query = $('#search').val()
   if(!query.length == 0) {
     console.log('triggered!')
-    getImagesForTag(currentUser, query, applyFilter)
+    searchQuery(currentUser, query, applyFilter)
   }
   else {
     $('#image-container').isotope({ filter: '*' });
