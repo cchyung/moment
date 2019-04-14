@@ -1,3 +1,9 @@
+//initial detatch of similar 
+let initial, similar;
+isInitialVisible = true;
+isSimilarVisible = false;
+
+
 $("#image-container").on('click', ".photo", (function (e) {
   console.log("clicked!")
   $(this).removeClass('photo');
@@ -17,10 +23,19 @@ $("#image-container").on('click', ".photo", (function (e) {
     </a>
     `
   )
+  initial = $('#initial').detach()
+  if(!similar) {
+    $('#similar').css('visibility', 'visible')
+  }
+  else {
+    $('.main').append(similar)
+  }
   $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }));
 
 $('#photo-container').on('click', '.exit', (function (e) {
+  similar = $('#similar').detach()
+  $('.main').append(initial)
   let photo = $('.selected-item')
   photo.appendTo("#image-container");
   $('#photo-container').animate({height:'0px'}, {
