@@ -22,13 +22,15 @@
 
   <!-- sidebar -->
   <div class="sidebar">
-    <h2 class="main-title">MOMENT.</h2>
+    <!-- <h2 class="main-title">MOMENT.</h2> -->
+    <div class=""><img class="logo" src="{{url_for('static', filename='logo white.png')}}" alt=""></div>
     <div class="md-form search">
         <input type="text" id="search" class="form-control">
         <label for="form1" class="searchlabel">search</label>
     </div>
     <h4 class="smart-title">Smart Albums</h4>
     <div class="smart-buttons-container">
+        <button type="button" class="btn waves-effect all-btn waves-light">All</button>
         <button type="button" class="btn waves-effect btn-color1 waves-light">Dog</button>
         <button type="button" class="btn waves-effect btn-color2 waves-light">Sunset</button>
         <button type="button" class="btn waves-effect btn-color3 waves-light">Mountains</button>
