@@ -50,7 +50,6 @@ function getSimilarImages(username, imageId, callback)
             'imageId': imageId
         },
         success: (data) => {
-            console.log(data)
             callback(data)
         }
     })

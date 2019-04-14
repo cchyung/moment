@@ -49,11 +49,15 @@ $("#image-container").on('click', ".photo", (function (e) {
   $(this).css({"position": "relative", "top": "0", "left": "0"}).removeClass('grid-item').addClass('selected-item')
 
   imageID = $(this).data('image-id');
-  getSimilarImages(currentUser, imageID, showSimilar)
-}));
 
-function showSimilar(images) {
-  console.log(images)
+  // clear similar container
+  let imageContainer = $("#similar-container")
+  
+
+  getSimilarImages(currentUser, imageID, renderSimilar)
+
+  
+
   // $(this).animate({width: '15rem'})
   e.stopImmediatePropagation();
   $('#photo-container').animate({height:'20rem'}, {
@@ -75,24 +79,34 @@ function showSimilar(images) {
     $('#similar').css('visibility', 'visible')
   }
   else {
-    $('.main').append(similar)
+    $('#first-main').append(similar)
   }
 
+  $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  
+}));
+
+function renderSimilar(images) {
   let imageContainer = $("#similar-container")
   let htmlToAppend = ``
   images['images'].forEach((image) => {
     htmlToAppend += 
     `
-      <div class="grid-item waves-effect waves-light photo" id="photo" data-image-id=${image['id']}><img src=https://storage.googleapis.com/${image['source']} ></div>
+      <div class="grid-item waves-effect waves-light photo grid-item-similar" id="photo" data-image-id=${image['id']}>
+        <img src=https://storage.googleapis.com/${image['source']}>
+        <p class='similarity-score'>${image['score'].toFixed(2)}%</p>
+      </div>
     `
   })
   imageContainer.append(htmlToAppend);
 
-  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }
 
 $('#photo-container').on('click', '.exit', (function (e) {
+  $('#similar-container').empty()
   similar = $('#similar').detach()
+  
   $('#first-main').append(initial)
   let photo = $('.selected-item')
   photo.appendTo("#image-container");

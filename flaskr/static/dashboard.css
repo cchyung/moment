@@ -141,9 +141,9 @@ input {
 }
 
 .grid-item { 
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   height: 13rem;
   /* width: auto; */
   /* background-color: gray; */
@@ -152,7 +152,10 @@ input {
   margin-top: .5rem;
 }
 
+
+
 .grid-item img {
+  display: block;
   height: 100%;
 }
 
@@ -231,4 +234,14 @@ input {
   margin: 0 auto;
   display: block;
   background-color: blue;
+}
+
+.grid-item-similar {
+  overflow: visible;
+  padding-bottom: 20px;
+}
+
+.similarity-score {
+  position: relative;
+  /* text-align: center; */
 }
