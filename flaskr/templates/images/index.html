@@ -36,32 +36,40 @@
     </div>
     <h4 class="img-search-title">Image Search</h4>
     <div class="dropzone-container">
-        <form action="/images/{{ username }}/upload-image"
+        <form action="/images/username/upload-image"
             class="dropzone"
             id="my-awesome-dropzone"></form>
     </div>
   </div>
 
   <!-- main view -->
-  <div id="index-view" class="main">
-    <h2 class="main-side-title" style="margin-bottom: 3rem; padding-left: 50px;">my photos</h2>
-
+  <div class="main" id="first-main">
+    <h2 class="main-side-title" style="margin-bottom: 3rem; padding-left: 50px">my photos</h2>
     <div class="large-photo-container" id="photo-container">
     </div>
-    <div class="pic-container">
-      <div id="image-container" class="grid"></div>
+    <div class="pic-container" id="initial">
+      <div id="image-container" class="grid">
+
+      </div>
     </div>
     <div class="pic-container" id="similar">
-      <div id="image-container" class="grid"></div>
-    </div>
-  </div>
+        <h2 style="display: inline" class="similar-title">Similar Photos</h2>
+        <button class="btn blue-gradient btn-rounded waves-effect waves-light create-album">Create Smart Album</button>
 
-  <div id="search-view" class="main hidden">
-    <h2 class="main-side-title" style="margin-bottom: 3rem">search results</h2>
-    <div class="pic-container">
-      <div id="search-results-container" class="grid"></div>
+        <div id="similar-container" class="grid" style="padding-left: 10px">
+            <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
+            <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
+            <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
+        </div>
     </div>
-  </div>
+</div>
+
+    <div id="search-view" class="main hidden">
+            <h2 class="main-side-title" style="margin-bottom: 3rem">search results</h2>
+            <div class="pic-container">
+              <div id="search-results-container" class="grid"></div>
+            </div>
+    </div>
 
   <!-- SCRIPTS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
