@@ -88,6 +88,29 @@ function uploadImage(username, imageFile, callback)
     })
 }
 
+function getTopTags(username, callback) {
+    jQuery.ajax({
+        url:`${ROOT_URL}/${username}/get-top-tags`,
+        type: 'GET',
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
+function getImagesForTag(username, tag, callback) {
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/get-album`,
+        type: 'GET',
+        data: {
+            'tag': tag
+        },
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
 function searchQuery(username, query, callback)
 {
     jQuery.ajax({

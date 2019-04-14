@@ -6,6 +6,7 @@ $(document).ready(() => {
   getImages(currentUser, renderImages);
   initSearch()
   setupMore()
+  loadTags()
 })
 
 // appends images to image container
@@ -119,3 +120,21 @@ Dropzone.options.myAwesomeDropzone = {
     })
   }
 };
+
+
+function loadTags() {
+  getTopTags(currentUser, renderTags)
+}
+
+function renderTags(tags) {
+  tagContainer = $('.smart-buttons-container')
+  htmlToAppend = ``
+  let i = 1
+  tags['tags'].forEach((tag) => {
+    htmlToAppend += 
+    `
+    <button type="button" class="btn waves-effect btn-color${i++} waves-light">${tag}</button>
+    `
+  })
+  tagContainer.append(htmlToAppend)
+}

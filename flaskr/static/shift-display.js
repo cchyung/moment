@@ -58,9 +58,9 @@ $("#image-container").on('click', ".photo", (function (e) {
   // clear similar container
   let imageContainer = $("#similar-container")
   
-
+  $('#load-more-btn').hide()
   getSimilarImages(currentUser, imageID, renderSimilar)
-  getTags(currentUser, imageID, renderTags)
+  getTags(currentUser, imageID, renderImageTags)
 
   
 
@@ -110,7 +110,7 @@ function renderSimilar(images) {
   $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }
 
-function renderTags(labels) {  
+function renderImageTags(labels) {  
   container = $('.selected-tags');
   let htmlToAppend = `<h3>Tags</h3>`
   let i = 1;
@@ -130,6 +130,8 @@ $('#photo-container').on('click', '.exit', (function (e) {
   container= $('.selected-tags')
   container.addClass('hidden')
   container.empty();
+
+  $('#load-more-btn').show()
   
   $('#first-main').append(initial)
   let photo = $('.selected-item')
