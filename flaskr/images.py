@@ -65,7 +65,16 @@ def search(username):
         'images': images
     })
 
+@bp.route('/<username>/similar', methods=('GET',))
+def similar(username):
+    imageId = request.args.get('imageId','')
 
+    images = es_client.simlar(vectorSimilaritySearch)
+    
+    return jsonify({
+        'username': username,
+        'images': images
+    })
 
 @bp.route('/<username>/upload-image', methods=('POST',))
 def upload_image(username):

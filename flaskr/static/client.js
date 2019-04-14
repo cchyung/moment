@@ -13,6 +13,22 @@ function getImages(username, callback)
     })
 }
 
+function getSimilarImages(username, imageId, callback) 
+{
+    console.log(`retrieving similar images for ${username}`)
+
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/similar`,
+        type: 'get',
+        data: {
+            'imageId': imageId
+        },
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
 function uploadImage(username, imageFile, callback)
 {
     let formData = new FormData()
