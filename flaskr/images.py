@@ -71,7 +71,7 @@ def search(username):
 def similar(username):
     imageId = request.args.get('imageId','')
 
-    images = es_client.vectorSimilaritySearch(imageId, pageSize=5)
+    images = es_client.vectorSimilaritySearch(imageId, pageSize=10)
     
     return jsonify({
         'username': username,

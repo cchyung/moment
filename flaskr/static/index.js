@@ -9,6 +9,7 @@ $(document).ready(() => {
   initSearch()
   setupMore()
   loadTags()
+  setupImageClick()
 })
 
 $('.all-btn').click(function() {
