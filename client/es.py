@@ -1,7 +1,7 @@
 import base64
 import struct
 import json
-
+import time
 from elasticsearch import Elasticsearch
 
 class ESClient:
@@ -22,7 +22,8 @@ class ESClient:
         doc = {
             'id': _id,
             'user_id': image.user,
-            'source': image.url
+            'source': image.url,
+            'timestamp': int(time.time())
         }
         if image.labels:
             doc['labels'] = image.labels
@@ -53,7 +54,14 @@ class ESClient:
               }
             ]
           }
-        }
+        },
+        "sort": [
+            {
+                "timestamp": {
+                    "order": "desc"
+                }
+            }
+        ]
       }
       return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
 
