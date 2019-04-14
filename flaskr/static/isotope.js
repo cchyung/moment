@@ -1,19 +1,39 @@
 
+var $similar = $('#similar-container').isotope({
+  // options
+  itemSelector: '.grid-item',
+  layoutMode: 'packery',
+  packery: {
+    gutter: 10
+  }
+}); 
+
+var grid = $('#image-container').isotope({
+  // options
+  itemSelector: '.grid-item',
+  layoutMode: 'packery',
+  packery: {
+    gutter: 10
+  }
+}); 
+
+
+function renderIsotopeSimilar() {
+  console.log('rerendering isotope')
+
+  $similar.imagesLoaded().progress( function() {
+    $similar.isotope('layout');
+  });
+  $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+}
 
 function renderIsotope() {
-  var grid = $('.grid').isotope({
-    // options
-    itemSelector: '.grid-item',
-    layoutMode: 'packery',
-    packery: {
-      gutter: 10
-    }
-  }); 
-  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
-
-  grid.imagesLoaded().progress( function() {
-    grid.isotope('layout');
-  });
+  console.log('rerendering initial isotope')
+  // grid.imagesLoaded().progress( function() {
+  //   grid.isotope('layout');
+  // });
+  $('#image-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  $('#image-container').isotope('layout')
 }
 
 $.Isotope.prototype._masonryReset = function() {

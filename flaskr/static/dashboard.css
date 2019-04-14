@@ -2,6 +2,9 @@ html {
   font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  background-color: antiquewhite;
+}
 /* SIDEBAR */
 /* ------------------------------------------------------- */
 
@@ -15,7 +18,9 @@ h3 {
   left: 0;
   width: 300px;
   height: 100%;
-  background-color: #F1F1F1;
+  background-color: #22283F;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .main-title {
@@ -26,6 +31,7 @@ h3 {
   font-family: 'Montserrat', sans-serif;
   margin-bottom: 0 !important;
   vertical-align: bottom;
+  color: white;
 }
 
 .search {
@@ -33,6 +39,7 @@ h3 {
   background-color: white;
   border-radius: 25px;
 }
+
 
 .searchlabel {
   padding-left: 15px;
@@ -45,6 +52,11 @@ input {
 
 .md-form .form-control {
   padding: .3rem 0 .7rem !important;
+  padding-left: .7rem !important;
+}
+
+.md-form input[type=text]:focus:not([readonly]) {
+  box-shadow: none !important;
 }
 
 .smart-title,
@@ -54,6 +66,7 @@ input {
   margin-bottom: 0 !important;
   padding-bottom: 0;
   margin-top: 2.5rem;
+  color: white;
 }
 
 .smart-buttons-container {
@@ -109,9 +122,10 @@ input {
 
 .dropzone {
   min-height: 150px;
-  border: 2px dashed rgba(75, 83, 255, 0.5) !important;
-  background: white;
+  border: 2px dashed white !important;
+  background: #22283F !important;
   padding: 20px 20px;
+  color: aliceblue;
 }
 
 
@@ -122,7 +136,7 @@ input {
   padding: 15px;
   padding-left: 0;
   padding-bottom: 0;
-  margin-top: 15px;
+  padding-top: 30px;
   font-weight: 600;
   font-family: 'Montserrat', sans-serif;
   vertical-align: bottom;

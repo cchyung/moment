@@ -20,16 +20,7 @@ function renderImages(images) {
   })
   imageContainer.append(htmlToAppend);
 
-  var grid = $('.grid').isotope({
-    // options
-    itemSelector: '.grid-item',
-    layoutMode: 'packery',
-    packery: {
-      gutter: 10
-    }
-  }); 
-
-  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+  $('#image-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 
   grid.imagesLoaded().progress( function() {
     grid.isotope('layout');
@@ -66,7 +57,6 @@ var searchDebounced = debounce(function (e) {
     setTimeout(() => {
       showIndex();
     }, 200)
-    
   }
 }, 500);
 
