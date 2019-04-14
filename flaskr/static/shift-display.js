@@ -5,7 +5,7 @@ let searchVisible = false
 let indexVisible = true
 
 searchView = $('#search-view')
-indexView = $('#index-view')
+indexView = $('#first-main')
 
 function showSearch() {
   if(!searchVisible){
@@ -55,6 +55,7 @@ $("#image-container").on('click', ".photo", (function (e) {
   
 
   getSimilarImages(currentUser, imageID, renderSimilar)
+  getTags(currentUser, imageID, renderTags)
 
   
 
@@ -101,6 +102,19 @@ function renderSimilar(images) {
   imageContainer.append(htmlToAppend);
 
   $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+}
+
+function renderTags(labels) {
+  container = $('.selected-item');
+  let htmlToAppend = ``
+  let i = 1;
+  labels['labels'].forEach((label) => {
+    htmlToAppend += 
+    `
+      <button class='btn waves-effect btn-color${i++} waves-light' type="button">${label}</div>
+    `
+  })
+  container.append(htmlToAppend);
 }
 
 $('#photo-container').on('click', '.exit', (function (e) {

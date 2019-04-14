@@ -55,6 +55,22 @@ function getSimilarImages(username, imageId, callback)
     })
 }
 
+function getTags(username, imageId, callback)
+{
+    console.log(`getting tags for ${imageId}`)
+
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/get-tags`,
+        type: 'get',
+        data: {
+            'imageId': imageId
+        },
+        success: (data) => {
+            callback(data)
+        }
+    })
+}
+
 function uploadImage(username, imageFile, callback)
 {
     let formData = new FormData()

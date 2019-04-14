@@ -92,6 +92,18 @@ input {
   box-shadow: none !important;
 }
 
+.btn-color6 {
+  background-color: #FF0000 !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
+.btn-color7 {
+  background-color: #CC4300 !important;
+  border-radius: 15px !important;
+  box-shadow: none !important;
+}
+
 .btn {
   padding: .5rem 1.5rem !important;
   color: white !important;

@@ -78,6 +78,19 @@ def similar(username):
         'images': images
     })
 
+@bp.route('/<username>/get-tags', methods=('GET',))
+def get_tags(username):
+    imageId = request.args.get('imageId','')
+
+    image = es_client.getImage(imageId)
+    
+    return jsonify({
+        'username': username,
+        'labels': image.labels
+    })
+
+
+
 @bp.route('/<username>/upload-image', methods=('POST',))
 def upload_image(username):
     """
