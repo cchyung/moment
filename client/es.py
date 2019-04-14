@@ -82,7 +82,7 @@ class ESClient:
             "tags": {
               "terms": {
                 "field": "labels.keyword",
-                "size": 5
+                "size": 12
               }
             }
           }

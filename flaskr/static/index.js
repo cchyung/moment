@@ -217,7 +217,7 @@ function renderTags(tags) {
   tags['tags'].forEach((tag) => {
     htmlToAppend += 
     `
-    <button type="button" class="tag btn waves-effect btn-color${i++} waves-light">${tag}</button>
+    <button type="button" class="tag btn waves-effect btn-color${(i++)%6+1} waves-light">${tag}</button>
     `
   })
   tagContainer.append(htmlToAppend)
