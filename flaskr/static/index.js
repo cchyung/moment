@@ -1,10 +1,11 @@
 currentUser = location.href.split('/').slice(-2)[0] 
-currentPage = 1
+currentPage = 0
 
 $(document).ready(() => {
   // retrieves images and renders them
   getImages(currentUser, renderImages);
   initSearch()
+  setupMore()
 })
 
 // appends images to image container
@@ -18,7 +19,8 @@ function renderImages(images) {
     `
   })
   imageContainer.append(htmlToAppend);
-  var $grid = $('.grid').isotope({
+
+  var grid = $('.grid').isotope({
     // options
     itemSelector: '.grid-item',
     layoutMode: 'packery',
@@ -26,14 +28,17 @@ function renderImages(images) {
       gutter: 10
     }
   }); 
-  $grid.imagesLoaded().progress( function() {
-    $grid.isotope('layout');
+
+  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+
+  grid.imagesLoaded().progress( function() {
+    grid.isotope('layout');
   });
 }
 
 /* ======== Load More ======== */
 function setupMore() {
-  $('load-more-btn').click(loadMoreImages);
+  $('#load-more-btn').click(loadMoreImages);
 }
 
 function loadMoreImages() {

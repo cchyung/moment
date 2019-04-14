@@ -43,8 +43,10 @@ def get_images(username):
     """
     returns list of all images and labels
     """
+    page = request.args.get('page',0)
+    page = int(page)
 
-    images = es_client.getUserImages(username)
+    images = es_client.getUserImages(username, page=page)
 
     return jsonify(
         {

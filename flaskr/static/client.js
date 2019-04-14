@@ -13,18 +13,31 @@ function getImages(username, callback)
     })
 }
 
-// function getMoreImages(username, page, callback) 
-// {
-//     console.log(`retrieving more images for ${username}`)
+function getMoreImages(username, page, callback) 
+{
+    console.log(`retrieving more images for ${username}`)
+    console.log(page)
+    jQuery.ajax({
+        url: `${ROOT_URL}/${username}/index`,
+        type: 'get',
+        data: {
+            'page': page
+        },
+        success: (data) => {
+            console.log(data)
+            if(data['images'].length > 0) {
+                renderImages(data);
+                currentPage += 1
+            } else {
+                noMoreImagesFound()
+            }
+        }
+    })
+}
 
-//     jQuery.ajax({
-//         url: `${ROOT_URL}/${username}/index`,
-//         type: 'get',
-//         data: {
-//             'page': page
-//         }
-//     }
-// }
+function noMoreImagesFound() {
+    $('#load-more-btn').fadeOut(200)
+}
 
 function getSimilarImages(username, imageId, callback) 
 {
