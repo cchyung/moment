@@ -15,7 +15,7 @@ function renderImages(images) {
   images['images'].forEach((image) => {
     htmlToAppend += 
     `
-      <div class="grid-item waves-effect waves-light photo" id="photo"><img src=https://storage.googleapis.com/${image['source']}></div>
+      <div class="grid-item waves-effect waves-light photo" id="photo" data-image-id=${image['id']}><img src=https://storage.googleapis.com/${image['source']} ></div>
     `
   })
   imageContainer.append(htmlToAppend);

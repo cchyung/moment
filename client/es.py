@@ -3,6 +3,7 @@ import struct
 import json
 import time
 from elasticsearch import Elasticsearch
+from flaskr.objects import Image
 
 class ESClient:
     def __init__(self):

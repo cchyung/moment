@@ -47,6 +47,13 @@ $("#image-container").on('click', ".photo", (function (e) {
   console.log("clicked!")
   $(this).removeClass('photo');
   $(this).css({"position": "relative", "top": "0", "left": "0"}).removeClass('grid-item').addClass('selected-item')
+
+  imageID = $(this).data('image-id');
+  getSimilarImages(currentUser, imageID, showSimilar)
+}));
+
+function showSimilar(images) {
+  console.log(images)
   // $(this).animate({width: '15rem'})
   e.stopImmediatePropagation();
   $('#photo-container').animate({height:'20rem'}, {
@@ -62,6 +69,7 @@ $("#image-container").on('click', ".photo", (function (e) {
     </a>
     `
   )
+  
   initial = $('#initial').detach()
   if(!similar) {
     $('#similar').css('visibility', 'visible')
@@ -69,8 +77,19 @@ $("#image-container").on('click', ".photo", (function (e) {
   else {
     $('.main').append(similar)
   }
+
+  let imageContainer = $("#similar-container")
+  let htmlToAppend = ``
+  images['images'].forEach((image) => {
+    htmlToAppend += 
+    `
+      <div class="grid-item waves-effect waves-light photo" id="photo" data-image-id=${image['id']}><img src=https://storage.googleapis.com/${image['source']} ></div>
+    `
+  })
+  imageContainer.append(htmlToAppend);
+
   $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
-}));
+}
 
 $('#photo-container').on('click', '.exit', (function (e) {
   similar = $('#similar').detach()
