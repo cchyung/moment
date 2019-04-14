@@ -19,7 +19,8 @@ With Moment, you can explore your photo library through similar images.
 <img src="https://github.com/cchyung/moment/blob/master/res/screencaps/similar2.png" style="float: right;" width="500"/>
 
 #### Filter by Smart Tags
-Moment automatically generates semantic tags for all of your images and allows you to filter by tags such as "Adventure", "Ocean", "Mountains", etc.
+Moment automatically generates semantic tags for all of your images and allows you to filter by tags such as "Adventure", "Ocean", "Mountains", etc.   
+
 <img src="https://github.com/cchyung/moment/blob/master/res/screencaps/tag.png" width="500"/>
 <img src="https://github.com/cchyung/moment/blob/master/res/screencaps/tag2.png" width="500"/>
 
