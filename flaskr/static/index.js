@@ -14,17 +14,19 @@ $(document).ready(() => {
 
 $('.all-btn').click(function() {
   $('#image-container').isotope({ filter: '*' });
+  photosHeader = $('#my-photos-header');
+  photosHeader.find('.tag').remove()
 })
 
 function initTags() {
   $('.tag').on('click', function() {
-
+    photosHeader = $('#my-photos-header');
+    photosHeader.find('.tag').remove()
     tag = $(this).text()
+    photosHeader.append($(this).clone())
     getImagesForTag(currentUser, tag, applyFilter)
   })
 }
-
-
 
 function applyFilter(images) {
   ids = []
