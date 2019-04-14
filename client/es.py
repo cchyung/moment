@@ -38,32 +38,32 @@ class ESClient:
         return im
 
     def getUserImages(self, user, pageSize=10, page=0):
-      q = {
-        "size": pageSize,
-        "from": page * pageSize,
-        "_source": ["id", "user_id", "source", "labels"],
-        "query": {
-          "bool": {
-            "must": [
-              {
-                "term": {
-                  "user_id": {
-                    "value": user
+        q = {
+          "size": pageSize,
+          "from": page * pageSize,
+          "_source": ["id", "user_id", "source", "labels"],
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "user_id": {
+                      "value": user
+                    }
                   }
                 }
-              }
-            ]
-          }
-        },
-        "sort": [
-            {
-                "timestamp": {
-                    "order": "desc"
-                }
+              ]
             }
-        ]
-      }
-      return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
+          },
+          "sort": [
+              {
+                  "timestamp": {
+                      "order": "desc"
+                  }
+              }
+          ]
+        }
+        return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
 
     
     def getAlbum(self, user, label, pageSize=20, page=0):
@@ -164,8 +164,12 @@ class ESClient:
             }
           }
         }
-        return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
-        
-#     def addAlbum():
-    
-#     def searchAlbum
+        hits = self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])
+        scores = [hit.get('_score') for hit in hits]
+        details = [hit.get('_source') for hit in hits]
+        response = []
+        for i, details in enumerate(details):
+            det = details
+            det['score'] = scores[i]
+            response.append(det)
+        return response
