@@ -104,22 +104,26 @@ function renderSimilar(images) {
   $('#similar-container').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
 }
 
-function renderTags(labels) {
-  container = $('.selected-item');
-  let htmlToAppend = ``
+function renderTags(labels) {  
+  container = $('.selected-tags');
+  let htmlToAppend = `<h3>Tags</h3>`
   let i = 1;
-  labels['labels'].forEach((label) => {
+  labels['labels'].slice(0, 5).forEach((label) => {
     htmlToAppend += 
     `
       <button class='btn waves-effect btn-color${i++} waves-light' type="button">${label}</div>
     `
   })
-  container.append(htmlToAppend);
+  container.append(htmlToAppend)
+  
 }
 
 $('#photo-container').on('click', '.exit', (function (e) {
   $('#similar-container').empty()
   similar = $('#similar').detach()
+  container= $('.selected-tags')
+  container.addClass('hidden')
+  container.empty();
   
   $('#first-main').append(initial)
   let photo = $('.selected-item')

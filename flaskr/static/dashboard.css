@@ -5,6 +5,9 @@ html {
 /* SIDEBAR */
 /* ------------------------------------------------------- */
 
+h3 {
+  font-size: 18px;
+}
 
 .sidebar {
   position: fixed;
@@ -265,6 +268,9 @@ input {
 }
 
 .selected-tags {
+  opacity: 1;
+  vertical-align: top;
   display: inline-block;
   width: 39%;
+  transition: 0.3s ease opacity;
 }
