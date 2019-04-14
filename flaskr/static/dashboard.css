@@ -182,7 +182,7 @@ input {
 .selected-item img {
   max-height:100%; 
   max-width:100%;
-  margin-top: 5%;
+  margin-top: 20px;
   margin-left: 3.5rem;
 }
 
@@ -268,6 +268,8 @@ input {
 }
 
 .selected-tags {
+  margin-top: 20px;
+  padding-left: 1.5rem;
   opacity: 1;
   vertical-align: top;
   display: inline-block;

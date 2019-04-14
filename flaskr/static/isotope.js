@@ -1,8 +1,20 @@
-// $('.grid').isotope({
-//   // options
-//   itemSelector: '.grid-item',
-//   layoutMode: 'cellsByRow'
-// });
+
+
+function renderIsotope() {
+  var grid = $('.grid').isotope({
+    // options
+    itemSelector: '.grid-item',
+    layoutMode: 'packery',
+    packery: {
+      gutter: 10
+    }
+  }); 
+  $('.grid').isotope( 'reloadItems' ).isotope( { sortBy: 'original-order' } );
+
+  grid.imagesLoaded().progress( function() {
+    grid.isotope('layout');
+  });
+}
 
 $.Isotope.prototype._masonryReset = function() {
   // layout-specific props
