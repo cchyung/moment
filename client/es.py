@@ -40,29 +40,29 @@ class ESClient:
 
     def getUserImages(self, user, pageSize=10, page=0):
         q = {
-          "size": pageSize,
-          "from": page * pageSize,
-          "_source": ["id", "user_id", "source", "labels"],
-          "query": {
-            "bool": {
-              "must": [
-                {
-                  "term": {
-                    "user_id": {
-                      "value": user
+            "size": pageSize,
+            "from": page * pageSize,
+            "_source": ["id", "user_id", "source", "labels"],
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "user_id": {
+                        "value": user
+                      }
                     }
                   }
-                }
-              ]
-            }
-          },
-          "sort": [
-              {
-                  "timestamp": {
-                      "order": "desc"
-                  }
+                ]
               }
-          ]
+            },
+            "sort": [
+                {
+                    "timestamp": {
+                        "order": "desc"
+                    }
+                }
+            ]
         }
         return [hit.get('_source') for hit in self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])]
 
@@ -151,7 +151,18 @@ class ESClient:
                           "exists": {
                             "field": "encoded_vector"
                           }
-                        },
+                        }
+                    ],
+                    "must_not": [
+                        {
+                            "term": {
+                                "id": {
+                                    "value": _id
+                                } 
+                            }
+                        }
+                    ],
+                    "filter": [
                         {
                             "term": {
                                 "user_id": {
@@ -166,7 +177,7 @@ class ESClient:
           }
         }
         hits = self.es.search(index='images-index', body=q).get('hits', {}).get('hits', [])
-        scores = [hit.get('_score') for hit in hits]
+        scores = [hit.get('_score')/2.0*100 for hit in hits]
         details = [hit.get('_source') for hit in hits]
         response = []
         for i, details in enumerate(details):
