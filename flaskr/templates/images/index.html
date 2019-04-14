@@ -7,6 +7,7 @@
   <title>albm</title>
   <link rel="stylesheet" href="{{url_for('static', filename='dashboard.css')}}">
   <link rel="stylesheet" href="{{url_for('static', filename='dropzone.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename='animate.css')}}">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
@@ -53,14 +54,14 @@
       </div>
     </div>
     <div class="pic-container" id="similar">
-        <h2 style="display: inline" class="similar-title">Similar Photos</h2>
-        <button class="btn blue-gradient btn-rounded waves-effect waves-light create-album">Create Smart Album</button>
-
-        <div id="similar-container" class="grid" style="padding-left: 10px">
-            <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
-            <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
-            <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
-        </div>
+            <h2 style="display: inline" class="similar-title">Similar Photos</h2>
+            <!-- <button class="btn blue-gradient btn-rounded waves-effect waves-light create-album">Create Smart Album</button> -->
+            
+            <div id="similar-container" class="grid" style="padding-left: 10px">
+                <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
+                <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
+                <div class="grid-item waves-effect waves-light placeholder" id="photo" >...</div>
+            </div>
     </div>
 </div>
 
