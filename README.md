@@ -3,6 +3,9 @@
 # Moment
 Photo discovery platform driven by AI
 
+Winner of Best Use of Google Cloud
+Runner up for Entrepreneurship Top Prize
+
 A Project for [HackSC 2019](https://devpost.com/software/moment-ebftnh)
 
 ## Description
